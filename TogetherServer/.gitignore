@@ -1,7 +1,23 @@
-/bin/
-/build/
-.DS_Store
+# Operating System Files
+
+*.DS_Store
+Thumbs.db
+*.sw?
+.#*
+*#
+*~
+*.sublime-*
+
+# Build Artifacts
+
 .gradle/
-.settings/
+build/
+target/
+bin/
+gen/
+
+# Eclipse Project Files
+
 .classpath
 .project
+.settings/
