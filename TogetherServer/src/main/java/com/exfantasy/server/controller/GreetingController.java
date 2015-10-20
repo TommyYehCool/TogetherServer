@@ -1,4 +1,4 @@
-package com.exfantasy.server.web;
+package com.exfantasy.server.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

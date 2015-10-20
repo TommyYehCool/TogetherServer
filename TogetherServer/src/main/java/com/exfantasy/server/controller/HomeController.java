@@ -1,4 +1,4 @@
-package com.exfantasy.server.web;
+package com.exfantasy.server.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
