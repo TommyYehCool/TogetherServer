@@ -40,7 +40,7 @@ public class UserController {
 		return "The user id is: " + userId;
 	}
 
-	@RequestMapping(value = "/save")
+	@RequestMapping(value = "/create")
 	@ResponseBody
 	public String create(String email, String name) {
 		try {
