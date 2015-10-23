@@ -42,9 +42,9 @@ public class UserController {
 
 	@RequestMapping(value = "/create")
 	@ResponseBody
-	public String create(String email, String name) {
+	public String create(String email, String name, int age) {
 		try {
-			User user = new User(email, name);
+			User user = new User(email, name, age);
 			_userDao.save(user);
 		} catch (Exception ex) {
 			return ex.getMessage();

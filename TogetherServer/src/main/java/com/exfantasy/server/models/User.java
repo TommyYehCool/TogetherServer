@@ -23,7 +23,10 @@ public class User {
 	@NotNull
 	@Size(min = 2, max = 80)
 	private String name;
-
+	
+	@NotNull
+	private int age;
+	
 	public User() {
 	}
 
@@ -31,9 +34,10 @@ public class User {
 		this.id = id;
 	}
 
-	public User(String email, String name) {
+	public User(String email, String name, int age) {
 		this.email = email;
 		this.name = name;
+		this.age = age;
 	}
 
 	public long getId() {
@@ -58,6 +62,14 @@ public class User {
 
 	public void setName(String value) {
 		this.name = value;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 } // class User
