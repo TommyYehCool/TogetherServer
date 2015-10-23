@@ -29,6 +29,12 @@ public class HomeController {
 		logger.info("Accessing protected resource");
 		return new Message(100, "Congratulations!", "You have accessed a Basic Auth protected resource.");
 	}
+	
+	@RequestMapping(value = "/commitTest", method = RequestMethod.GET)
+	public @ResponseBody Message commitTest() {
+		logger.info("GitHub commitTest");
+		return new Message(100, "Congratulations!", "GitHub commitTest success.");
+	}
 
 //	@RequestMapping(value = "/DBtest", method = RequestMethod.GET)
 //	public int DBinfo(@RequestParam(value = "id", required = false)String id) {
