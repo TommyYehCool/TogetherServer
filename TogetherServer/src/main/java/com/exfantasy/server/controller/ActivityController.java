@@ -12,7 +12,7 @@ public class ActivityController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ActivityController.class);
 
-	@RequestMapping(value = "/activity", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
 	public String create() {
 		return "Return from ActivityController create";
 	}
