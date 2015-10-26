@@ -1,29 +1,43 @@
 package com.exfantasy.server.controller;
 
-import com.exfantasy.server.models.User;
-import com.exfantasy.server.models.UserDao;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.exfantasy.server.models.User;
+import com.exfantasy.server.service.UserManagerImpl;
+
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
-	private UserDao _userDao;
+	private UserManagerImpl userManager;
+	
+	@RequestMapping(value = "/create")
+	@ResponseBody
+	public String create(String email, String name, int age) {
+		User user = new User(email, name, age);
+		try {
+			userManager.save(user);
+			logger.info("Create " + user + " succeed");
+		} catch (Exception ex) {
+			logger.warn("Create " + user + " failed, err-msg: <" + ex.getMessage() + ">");
+			return ex.getMessage();
+		}
+		return "User succesfully saved!";
+	}
 
 	@RequestMapping(value = "/delete")
 	@ResponseBody
 	public String delete(long id) {
-		try {
-			User user = new User(id);
-			_userDao.delete(user);
-		} catch (Exception ex) {
-			return ex.getMessage();
-		}
+		User user = new User(id);
+		userManager.delete(user);
 		return "User succesfully deleted!";
 	}
 
@@ -32,24 +46,12 @@ public class UserController {
 	public String getByEmail(String email) {
 		String userId;
 		try {
-			User user = _userDao.getByEmail(email);
+			User user = userManager.getByEmail(email);
 			userId = String.valueOf(user.getId());
 		} catch (Exception ex) {
 			return "User not found";
 		}
 		return "The user id is: " + userId;
-	}
-
-	@RequestMapping(value = "/create")
-	@ResponseBody
-	public String create(String email, String name, int age) {
-		try {
-			User user = new User(email, name, age);
-			_userDao.save(user);
-		} catch (Exception ex) {
-			return ex.getMessage();
-		}
-		return "User succesfully saved!";
 	}
 
 } // class UserController
