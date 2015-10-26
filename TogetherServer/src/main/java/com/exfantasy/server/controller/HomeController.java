@@ -36,9 +36,4 @@ public class HomeController {
 		return new Message(100, "Congratulations!", "GitHub commitTest success.");
 	}
 
-//	@RequestMapping(value = "/DBtest", method = RequestMethod.GET)
-//	public int DBinfo(@RequestParam(value = "id", required = false)String id) {
-//		logger.info("Spring DBinfo");
-//		return jdbc.queryForInt("select tltest:tableinfotest.value1 from tltest:tableinfotest where TLTEST:TABLEINFOTEST.value2='t'");
-//	}
 }
