@@ -19,62 +19,59 @@ public class User {
 	@NotNull
 	@Size(min = 3, max = 80)
 	private String email;
+	
+	@NotNull
+	@Size(min = 6, max = 20)
+	private String password;
 
 	@NotNull
 	@Size(min = 2, max = 80)
-	private String name;
+	private String nickname;
 	
-	@NotNull
-	private int age;
-	
-	public User() {
-	}
-
 	public User(long id) {
 		this.id = id;
 	}
 
-	public User(String email, String name, int age) {
+	public User(String email, String password, String nickName) {
 		this.email = email;
-		this.name = name;
-		this.age = age;
+		this.password = password;
+		this.nickname = nickName;
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long value) {
-		this.id = value;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String value) {
-		this.email = value;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getName() {
-		return name;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setName(String value) {
-		this.name = value;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public int getAge() {
-		return age;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", name=" + name + ", age=" + age + "]";
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname + "]";
 	}
-
 }

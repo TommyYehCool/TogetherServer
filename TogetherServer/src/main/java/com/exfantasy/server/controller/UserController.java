@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exfantasy.server.models.User;
@@ -19,20 +20,20 @@ public class UserController {
 	@Autowired
 	private UserManager userManager;
 	
-	@RequestMapping(value = "/create")
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public String create(String email, String name, int age) {
-		User user = new User(email, name, age);
+	public String register(String email, String password, String nickName) {
+		User user = new User(email, password, nickName);
 		try {
 			userManager.save(user);
-			logger.info("Create " + user + " succeed");
+			logger.info("Register " + user + " succeed");
 		} catch (Exception ex) {
-			logger.warn("Create " + user + " failed, err-msg: <" + ex.getMessage() + ">");
+			logger.warn("Register " + user + " failed, err-msg: <" + ex.getMessage() + ">");
 			return ex.getMessage();
 		}
-		return "User succesfully saved!";
+		return "User register succeed";
 	}
-
+	
 	@RequestMapping(value = "/delete")
 	@ResponseBody
 	public String delete(long id) {
