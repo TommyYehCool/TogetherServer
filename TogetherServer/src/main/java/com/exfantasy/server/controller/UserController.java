@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exfantasy.server.models.User;
-import com.exfantasy.server.service.UserManagerImpl;
+import com.exfantasy.server.service.UserManager;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -17,7 +17,7 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	private UserManagerImpl userManager;
+	private UserManager userManager;
 	
 	@RequestMapping(value = "/create")
 	@ResponseBody
@@ -54,4 +54,4 @@ public class UserController {
 		return "The user id is: " + userId;
 	}
 
-} // class UserController
+}
