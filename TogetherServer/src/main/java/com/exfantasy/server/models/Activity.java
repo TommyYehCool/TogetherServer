@@ -17,11 +17,11 @@ public class Activity {
 	private long id;
 	
 	@NotNull
-	@Column(precision=9, scale=6)
+	@Column(precision = 9, scale = 6)
 	private double latitude;
 	
 	@NotNull
-	@Column(precision=9, scale=6)
+	@Column(precision = 9, scale = 6)
 	private double longitude;
 	
 	@NotNull
