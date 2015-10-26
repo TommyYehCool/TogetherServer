@@ -17,7 +17,7 @@ public class User {
 	private long id;
 
 	@NotNull
-	@Size(min = 3, max = 80)
+	@Size(min = 8, max = 80)
 	private String email;
 	
 	@NotNull
@@ -25,7 +25,7 @@ public class User {
 	private String password;
 
 	@NotNull
-	@Size(min = 2, max = 80)
+	@Size(min = 1, max = 80)
 	private String nickname;
 	
 	public User(long id) {
