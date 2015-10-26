@@ -15,7 +15,7 @@ public class UserManagerImpl implements UserManager {
 	private UserDao userDao;
 
 	@Override
-	public void save(User user) {
+	public void register(User user) {
 		userDao.save(user);
 	}
 

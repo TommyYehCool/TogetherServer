@@ -25,7 +25,7 @@ public class UserController {
 	public String register(String email, String password, String nickName) {
 		User user = new User(email, password, nickName);
 		try {
-			userManager.save(user);
+			userManager.register(user);
 			logger.info("Register " + user + " succeed");
 		} catch (Exception ex) {
 			logger.warn("Register " + user + " failed, err-msg: <" + ex.getMessage() + ">");
