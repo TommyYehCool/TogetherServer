@@ -1,5 +1,6 @@
 package com.exfantasy.server.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +17,11 @@ public class Activity {
 	private long id;
 	
 	@NotNull
-	@Size(max = 20)
+	@Column(precision=9, scale=6)
 	private double latitude;
 	
 	@NotNull
-	@Size(max = 20)
+	@Column(precision=9, scale=6)
 	private double longitude;
 	
 	@NotNull
