@@ -16,8 +16,12 @@ public class Activity {
 	private long id;
 	
 	@NotNull
-	@Size(min = 20)
-	private long latitude;
+	@Size(max = 20)
+	private double latitude;
+	
+	@NotNull
+	@Size(max = 20)
+	private double longitude;
 	
 	@NotNull
 	@Size(min = 1, max = 20)
