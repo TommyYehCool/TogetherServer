@@ -20,7 +20,7 @@ public class UserController {
 	@Autowired
 	private UserManager userManager;
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String register(String email, String password, String name) {
 		User user = new User(email, password, name);
@@ -34,7 +34,7 @@ public class UserController {
 		return "User register succeed";
 	}
 	
-	@RequestMapping(value = "/delete")
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String delete(long id) {
 		User user = new User(id);
@@ -42,7 +42,7 @@ public class UserController {
 		return "User succesfully deleted!";
 	}
 
-	@RequestMapping(value = "/get-by-email")
+	@RequestMapping(value = "/get-by-email", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String getByEmail(String email) {
 		String userId;
