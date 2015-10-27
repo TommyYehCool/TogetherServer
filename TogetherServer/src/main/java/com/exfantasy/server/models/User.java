@@ -28,10 +28,9 @@ public class User {
 	@Size(min = 1, max = 30)
 	private String name;
 	
-	public User(long id) {
-		this.id = id;
+	public User() {
 	}
-
+	
 	public User(String email, String password, String name) {
 		this.email = email;
 		this.password = password;

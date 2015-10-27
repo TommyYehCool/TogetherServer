@@ -1,18 +1,16 @@
 package com.exfantasy.server.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.exfantasy.server.dao.UserDao;
 import com.exfantasy.server.models.User;
+import com.exfantasy.server.models.UserRepository;
 
 @Service
 public class UserManagerImpl implements UserManager {
 	
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userDao;
 
 	@Override
 	public void register(User user) {
@@ -21,27 +19,17 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public void update(User user) {
-		userDao.update(user);
+		userDao.save(user);
 	}
 
 	@Override
-	public void delete(User user) {
-		userDao.delete(user);
+	public void delete(long id) {
+		userDao.delete(id);
 	}
 
 	@Override
-	public List<User> getAll() {
-		return userDao.getAll();
-	}
-
-	@Override
-	public User getByEmail(String email) {
-		return userDao.getByEmail(email);
-	}
-
-	@Override
-	public User getById(long id) {
-		return userDao.getById(id);
+	public User findByEmail(String email) {
+		return userDao.findByEmail(email);
 	}
 	
 }

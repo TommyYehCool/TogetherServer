@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,12 @@ public class UserController {
 
 	@Autowired
 	private UserManager userManager;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String userPage(Model model) {
+		model.addAttribute("user", new User());
+		return "user";
+	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -37,22 +44,13 @@ public class UserController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String delete(long id) {
-		User user = new User(id);
-		userManager.delete(user);
+		userManager.delete(id);
 		return "User succesfully deleted!";
 	}
 
-	@RequestMapping(value = "/get-by-email", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/find-by-email", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String getByEmail(String email) {
-		String userId;
-		try {
-			User user = userManager.getByEmail(email);
-			userId = String.valueOf(user.getId());
-		} catch (Exception ex) {
-			return "User not found";
-		}
-		return "The user id is: " + userId;
+	public User findByEmail(String email) {
+		return userManager.findByEmail(email);
 	}
-
 }
