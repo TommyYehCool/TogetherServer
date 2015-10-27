@@ -23,10 +23,12 @@ public class MailController {
 	@ResponseBody
 	public String sendMail() {
 		SimpleMailMessage mail = new SimpleMailMessage();
+
 		mail.setTo("tommy.yeh1112@gmail.com");
 		mail.setSubject("This is a test from SpringBoot");
 		mail.setText("Hello~~");
 		mailSender.send(mail);
+
 		return "Send mail succeed";
 	}
 }
