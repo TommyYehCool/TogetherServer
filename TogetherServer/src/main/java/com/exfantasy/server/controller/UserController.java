@@ -32,15 +32,16 @@ public class UserController {
 	@ResponseBody
 	public String register(String email, String password, String name) {
 		User user = new User(email, password, name);
+		String succeedMsg = "Register " + user + " succeed";
 		try {
 			userManager.register(user);
-			logger.info("Register " + user + " succeed");
+			logger.info(succeedMsg);
 		} 
 		catch (Exception ex) {
 			logger.warn("Register " + user + " failed, err-msg: <" + ex.getMessage() + ">");
 			return ex.getMessage();
 		}
-		return "User register succeed";
+		return succeedMsg;
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json")

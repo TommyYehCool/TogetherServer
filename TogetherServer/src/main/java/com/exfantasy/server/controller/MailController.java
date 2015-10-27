@@ -22,12 +22,10 @@ public class MailController {
 	@RequestMapping(value = "/send", method = RequestMethod.GET)
 	@ResponseBody
 	public String sendMail() {
-		logger.info(">>>>>>> In MailController");
-		
 		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setTo("bensn11@gmail.com");
+		mail.setTo("tommy.yeh1112@gmail.com");
 		mail.setSubject("This is a test from SpringBoot");
-		mail.setText("Fuck you benson");
+		mail.setText("Hello~~");
 		mailSender.send(mail);
 		return "Send mail succeed";
 	}

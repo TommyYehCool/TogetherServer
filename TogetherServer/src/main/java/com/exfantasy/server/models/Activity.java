@@ -33,7 +33,7 @@ public class Activity {
 	private int numberOfPeople;
 	
 	@NotNull
-	@Size(min = 10, max = 50)
+	@Size(min = 1, max = 50)
 	private String remark;
 
 	public long getId() {
