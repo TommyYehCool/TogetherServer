@@ -5,9 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.exfantasy.server.vo.Message;
 
 @Controller
 @RequestMapping("/*")
@@ -22,18 +19,6 @@ public class HomeController {
 	public String home() {
 		logger.info("Spring Android Basic Auth");
 		return "home";
-	}
-
-	@RequestMapping(value = "/getmessage", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody Message getMessage() {
-		logger.info("Accessing protected resource");
-		return new Message(100, "Congratulations!", "You have accessed a Basic Auth protected resource.");
-	}
-	
-	@RequestMapping(value = "/commitTest", method = RequestMethod.GET)
-	public @ResponseBody Message commitTest() {
-		logger.info("GitHub commitTest");
-		return new Message(100, "Congratulations!", "GitHub commitTest success.");
 	}
 
 }
