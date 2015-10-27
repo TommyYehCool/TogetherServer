@@ -22,8 +22,8 @@ public class UserController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public String register(String email, String password, String nickName) {
-		User user = new User(email, password, nickName);
+	public String register(String email, String password, String name) {
+		User user = new User(email, password, name);
 		try {
 			userManager.register(user);
 			logger.info("Register " + user + " succeed");

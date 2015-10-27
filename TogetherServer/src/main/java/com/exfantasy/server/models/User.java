@@ -17,7 +17,7 @@ public class User {
 	private long id;
 
 	@NotNull
-	@Size(min = 8, max = 80)
+	@Size(min = 10, max = 30)
 	private String email;
 	
 	@NotNull
@@ -25,17 +25,17 @@ public class User {
 	private String password;
 
 	@NotNull
-	@Size(min = 1, max = 80)
-	private String nickname;
+	@Size(min = 1, max = 30)
+	private String name;
 	
 	public User(long id) {
 		this.id = id;
 	}
 
-	public User(String email, String password, String nickName) {
+	public User(String email, String password, String name) {
 		this.email = email;
 		this.password = password;
-		this.nickname = nickName;
+		this.name = name;
 	}
 
 	public long getId() {
@@ -62,16 +62,16 @@ public class User {
 		this.password = password;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getName() {
+		return name;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname + "]";
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + "]";
 	}
 }
