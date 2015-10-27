@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exfantasy.server.models.User;
@@ -44,14 +45,14 @@ public class UserController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String delete(long id) {
+	public String delete(@RequestParam("id") long id) {
 		userManager.delete(id);
 		return "User succesfully deleted!";
 	}
 
 	@RequestMapping(value = "/find-by-email", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public User findByEmail(String email) {
+	public User findByEmail(@RequestParam("email") String email) {
 		logger.info("Prepare to find user by email: <" + email + ">");
 		User user = userManager.findByEmail(email);
 		if (user != null) {

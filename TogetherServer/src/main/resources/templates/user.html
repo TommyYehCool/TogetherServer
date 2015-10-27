@@ -16,7 +16,7 @@
     <h1>Find by email</h1>
     <form action="#" th:action="@{/user/find-by-email}" method="post">
     	<!-- 這邊 th 不知道怎麼寫, controller 才收得到 -->
-    	<p>Email: <input type="text" th:value="${email}" /></p>
+    	<p>Email: <input type="text" name="email" /></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </body>
