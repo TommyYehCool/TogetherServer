@@ -31,7 +31,7 @@ public class ActivityController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String create(@ModelAttribute Activity activity, Model model) {
-		return "§A¦¨¥\«Ø¥ß¬¡°Ê, " + activity;
+		return "ä½ æˆåŠŸå»ºç«‹æ´»å‹•, " + activity;
 	}
 
 }
