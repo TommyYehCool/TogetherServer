@@ -52,6 +52,14 @@ public class UserController {
 	@RequestMapping(value = "/find-by-email", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public User findByEmail(String email) {
-		return userManager.findByEmail(email);
+		logger.info("Prepare to find user by email: <" + email + ">");
+		User user = userManager.findByEmail(email);
+		if (user != null) {
+			logger.info("Found: " + user);
+		}
+		else {
+			logger.info("Not found");
+		}
+		return user;
 	}
 }
