@@ -34,7 +34,8 @@ public class UserController {
 		try {
 			userManager.register(user);
 			logger.info("Register " + user + " succeed");
-		} catch (Exception ex) {
+		} 
+		catch (Exception ex) {
 			logger.warn("Register " + user + " failed, err-msg: <" + ex.getMessage() + ">");
 			return ex.getMessage();
 		}
