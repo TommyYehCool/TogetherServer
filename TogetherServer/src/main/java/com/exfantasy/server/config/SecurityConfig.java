@@ -13,6 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * Reference site:	
 	 * 		http://ithelp.ithome.com.tw/question/10160537
+	 * 		http://www.sivalabs.in/2014/03/springmvc4-spring-data-jpa.html
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
