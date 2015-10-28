@@ -40,8 +40,11 @@ public class FileController {
 		if (!file.isEmpty()) {
 			BufferedOutputStream stream = null;
 			try {
+				String originalFilename = file.getOriginalFilename();
+				String extName = originalFilename.substring(originalFilename.lastIndexOf("."), originalFilename.length());
+				
 				byte[] bytes = file.getBytes();
-				stream = new BufferedOutputStream(new FileOutputStream(new File(STORE_FILE_PATH + name + ".jpg")));
+				stream = new BufferedOutputStream(new FileOutputStream(new File(STORE_FILE_PATH + name + extName)));
 	            stream.write(bytes);
 	            return "You successfully uploaded " + name + "!";
 	        } 
