@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,25 +17,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class UploadController {
+@RequestMapping(value = "/file")
+public class FileController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MailController.class);
 	
-	private final String PREFIX_PATH = "D:/Exfantasy/";
+	@Value("${store.file.path}")
+	private String STORE_FILE_PATH;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String fileUpload(Model model) {
-		return "upload";
+		return "file_upload";
 	}
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
 	public String handleFileUpload(@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
+		if (!STORE_FILE_PATH.endsWith("/")) {
+			STORE_FILE_PATH += "/";
+		}
+		
 		if (!file.isEmpty()) {
 			BufferedOutputStream stream = null;
 			try {
 				byte[] bytes = file.getBytes();
-				stream = new BufferedOutputStream(new FileOutputStream(new File(PREFIX_PATH + name + ".jpg")));
+				stream = new BufferedOutputStream(new FileOutputStream(new File(STORE_FILE_PATH + name + ".jpg")));
 	            stream.write(bytes);
 	            return "You successfully uploaded " + name + "!";
 	        } 
