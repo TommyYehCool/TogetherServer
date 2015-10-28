@@ -60,7 +60,7 @@ public class UserController {
 			logger.info("Found: " + user);
 		}
 		else {
-			logger.info("Not found");
+			logger.info("Not found: " + email);
 		}
 		return user;
 	}
