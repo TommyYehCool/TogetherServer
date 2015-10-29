@@ -1,10 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
+	<link th:substituteby="common/header :: common_link"/>
     <title>Spring for Android Showcase</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+	<div th:substituteby="common/header :: body_header"></div>
+
     <h1>Spring Android Basic Auth Server</h1>
 </body>
 </html>
