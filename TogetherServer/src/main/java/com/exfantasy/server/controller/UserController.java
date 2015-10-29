@@ -32,35 +32,59 @@ public class UserController {
 	@ResponseBody
 	public String register(String email, String password, String name) {
 		User user = new User(email, password, name);
-		String succeedMsg = "Register " + user + " succeed";
 		try {
+			logger.info("Prepare to register " + user);
+			
 			userManager.register(user);
+
+			String succeedMsg = "Register " + user + " succeed";
 			logger.info(succeedMsg);
+
+			return succeedMsg;
 		} 
 		catch (Exception ex) {
-			logger.warn("Register " + user + " failed, err-msg: <" + ex.getMessage() + ">");
-			return ex.getMessage();
+			String failedMsg = "Register " + user + " failed, err-msg: <" + ex.getMessage() + ">";
+
+			logger.warn(failedMsg);
+
+			return failedMsg;
 		}
-		return succeedMsg;
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String delete(@RequestParam("id") long id) {
-		userManager.delete(id);
-		return "User succesfully deleted!";
+		try {
+			logger.warn("Prepare to delete user with id: <" + id + ">");
+			
+			userManager.delete(id);
+			
+			String succeedMsg = "Delete user with id: <" + id + "> succeed";
+
+			logger.info(succeedMsg);
+			
+			return succeedMsg;
+		}
+		catch (Exception e) {
+			String failedMsg = "Delete user with id: <" + id + "> failed, msg: <" + e.getMessage() + ">";
+
+			logger.warn(failedMsg);
+			
+			return failedMsg;
+		}
 	}
 
 	@RequestMapping(value = "/find-by-email", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public User findByEmail(@RequestParam("email") String email) {
 		logger.info("Prepare to find user by email: <" + email + ">");
+
 		User user = userManager.findByEmail(email);
 		if (user != null) {
 			logger.info("Found: " + user);
 		}
 		else {
-			logger.info("Not found: " + email);
+			logger.warn("Not found: " + email);
 		}
 		return user;
 	}

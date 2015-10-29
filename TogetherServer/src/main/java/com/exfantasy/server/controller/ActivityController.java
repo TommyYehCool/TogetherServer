@@ -31,13 +31,23 @@ public class ActivityController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String createActivity(@ModelAttribute Activity activity, Model model) {
-		String succeedMsg = "Create " + activity + " succeed!";
 		try {
+			logger.info("Prepare to create " + activity);
+			
 			activityManager.create(activity);
+			
+			String succeedMsg = "Create " + activity + " succeed!";
+
 			logger.info(succeedMsg);
-		} catch (Exception e) {
-			logger.error("Create " + activity + " failed, err-msg: <" + e.getMessage() + ">");
+			
+			return succeedMsg;
+		} 
+		catch (Exception e) {
+			String failedMsg = "Create " + activity + " failed, err-msg: <" + e.getMessage() + ">";
+
+			logger.warn(failedMsg);
+			
+			return failedMsg;
 		}
-		return succeedMsg;
 	}
 }
