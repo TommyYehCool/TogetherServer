@@ -16,6 +16,6 @@ public class ResourceConfig extends WebMvcConfigurerAdapter {
 		if (!STORE_FILE_PATH.endsWith("/")) {
 			STORE_FILE_PATH += "/";
 		}
-		registry.addResourceHandler("/images/**").addResourceLocations("file:" + STORE_FILE_PATH);
+		registry.addResourceHandler("/photos/**").addResourceLocations("file:" + STORE_FILE_PATH);
 	}
 }
