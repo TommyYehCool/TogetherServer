@@ -160,10 +160,20 @@
 	<!-- Map -->
 	<div id="map"></div>
 	<script>
-		var map = new GMaps({
+		var map;
+		map = new GMaps({
 			el : '#map',
 			lat : 25.076237,
 			lng : 121.480514
+		});
+		
+		map.addMarker({
+			lat : 25.076237,
+			lng : 121.480514,
+	        title: 'Tommy Home',
+	        infoWindow: {
+	          content: '<p>Sweet home of Tommy</p>'
+	        }
 		});
 	</script>
 	
