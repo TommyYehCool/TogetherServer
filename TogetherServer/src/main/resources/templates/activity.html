@@ -1,18 +1,43 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Testing activity page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-	<h1>Form</h1>
-    <form action="#" th:action="@{/activity/create}" th:object="${activity}" method="post">
-    	<p>緯度: <input type="text" th:field="*{latitude}" /></p>
-        <p>經度: <input type="text" th:field="*{longitude}" /></p>
-        <p>活動名稱: <input type="text" th:field="*{name}" /></p>
-        <p>人數: <input type="number" th:field="*{numberOfPeople}" /></p>
-        <p>說明: <textarea cols="50" rows="5" th:field="*{remark}">請輸入活動說明</textarea></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-    </form>
-</body>
+	<head>
+	    <title>Activity</title>
+	    <link th:substituteby="common/tag :: header_link" />
+	</head>
+
+	<body>
+		<h1>新增活動</h1>
+	    <form action="#" th:action="@{/activity/create}" th:object="${activity}" method="post">
+	    	<div class="form-group">
+	    		<label for="inputLatitude">緯度</label> 
+	    		<input type="text" class="form-control" id="inputLatitude" placeholder="Enter latitude" th:field="*{latitude}" />
+	    	</div>
+	    	
+	    	<div class="form-group">
+	        	<label for="inputLongitude">經度</label> 
+	        	<input type="text" class="form-control" id="inputLongitude" placeholder="Enter longitude" th:field="*{longitude}" />
+	        </div>
+	        
+	        <div class="form-group">
+	        	<label for="inputName">活動名稱</label> 
+	        	<input type="text" class="form-control" id="inputName" placeholder="Enter name" th:field="*{name}" />
+	        </div>
+	        
+	        <div class="form-group">
+	        	<label for="inputNumberOfPeople">人數</label>
+	        	<input type="text" class="form-control" id="inputNumberOfPeople" placeholder="Enter number of people" th:field="*{numberOfPeople}" />
+	        </div>
+	        
+	        <div class="form-group">
+  				<label for="comment">說明</label>
+  				<textarea class="form-control" rows="5" id="comment" th:field="*{remark}"></textarea>
+			</div>
+	        
+	        <button type="submit" class="btn btn-defaule">Submit</button> 
+	        <button type="reset" class="btn btn-default">Reset</button>
+	    </form>
+	    
+	    <!-- Load script at the end of the body, will speed up the page loading -->
+		<div th:substituteby="common/tag :: body_tail"></div>
+	</body>
 </html>
