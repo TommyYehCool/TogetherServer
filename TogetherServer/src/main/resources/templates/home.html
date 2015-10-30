@@ -3,7 +3,7 @@
 	<head>
 		<title>Together - To Get Her</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link th:substituteby="common/header :: common_link" />
+		<link th:substituteby="common/tag :: header_link" />
 		<link href="css/home.css" rel="stylesheet" type="text/css" />
 		
 	  	<style type="text/css">
@@ -209,7 +209,7 @@
 		</div>
 	
 		<!-- Load script at the end of the body, will speed up the page loading -->
-		<div th:substituteby="common/header :: body_header"></div>
+		<div th:substituteby="common/tag :: body_tail"></div>
 		<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 	 	<script src="js/gmaps.js"></script>
 	 	<script>

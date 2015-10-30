@@ -1,41 +1,42 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<link th:substituteby="common/header :: common_link"/>
-    <title>Testing user page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:substituteby="common/tag :: header_link" />
+<title>Testing user page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div th:substituteby="common/header :: body_header"></div>
-
 	<h1>Register</h1>
-	<form action="#" th:action="@{/user/register}" th:object="${user}" method="post">  
-	  <div class="form-group">
-	    <label for="inputEmail">Email address</label>
-	    <input type="text" class="form-control" id="inputEmail" placeholder="Enter email" th:field="*{email}" />
-	  </div>
-	  <div class="form-group">
-	    <label for="inputPwd">Password</label>
-	    <input type="password" class="form-control" id="inputPwd" placeholder="Enter password" th:field="*{password}" />
-	  </div>
-	  <div class="form-group">
-	    <label for="inputName">Name</label>
-	    <input type="text" class="form-control" id="inputName" placeholder="Enter name" th:field="*{name}" />
-	  </div>
-	 
-	  <button type="submit" class="btn btn-default">Submit</button>
-	  <button type="reset" class="btn btn-default">Reset</button>
-	  
+	<form action="#" th:action="@{/user/register}" th:object="${user}" method="post">
+		<div class="form-group">
+			<label for="inputEmail">Email address</label>
+			<input type="text" class="form-control" id="inputEmail" placeholder="Enter email" th:field="*{email}" />
+		</div>
+		<div class="form-group">
+			<label for="inputPwd">Password</label>
+			<input type="password" class="form-control" id="inputPwd" placeholder="Enter password" th:field="*{password}" />
+		</div>
+		<div class="form-group">
+			<label for="inputName">Name</label>
+			<input type="text" class="form-control" id="inputName" placeholder="Enter name" th:field="*{name}" />
+		</div>
+
+		<button type="submit" class="btn btn-default">Submit</button>
+		<button type="reset" class="btn btn-default">Reset</button>
+
 	</form>
-	
-    <h1>Find by email</h1>
-    <form action="#" th:action="@{/user/find-by-email}" method="post">
-      <div class="form-group">
-	    <label for="findByEmail">Email address</label>
-	    <input type="text" class="form-control" id="inputQryEmail" name="email" placeholder="Enter email" />
-	  </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-	  <button type="reset" class="btn btn-default">Reset</button>
-    </form>
+
+	<h1>Find by email</h1>
+	<form action="#" th:action="@{/user/find-by-email}" method="post">
+		<div class="form-group">
+			<label for="findByEmail">Email address</label>
+			<input type="text" class="form-control" id="inputQryEmail" name="email" placeholder="Enter email" />
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
+		<button type="reset" class="btn btn-default">Reset</button>
+	</form>
+
+	<!-- Load script at the end of the body, will speed up the page loading -->
+	<div th:substituteby="common/tag :: body_tail"></div>
 </body>
 </html>
