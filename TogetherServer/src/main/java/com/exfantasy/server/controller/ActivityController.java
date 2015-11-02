@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.exfantasy.server.models.Activity;
+import com.exfantasy.server.models.ActivityEntity;
 import com.exfantasy.server.service.ActivityManager;
 
 @Controller
@@ -24,13 +24,13 @@ public class ActivityController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String activityPage(Model model) {
-		model.addAttribute("activity", new Activity());
+		model.addAttribute("activity", new ActivityEntity());
 		return "activity";
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String createActivity(@ModelAttribute Activity activity, Model model) {
+	public String createActivity(@ModelAttribute ActivityEntity activity, Model model) {
 		try {
 			logger.info("Prepare to create " + activity);
 			

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.exfantasy.server.models.User;
+import com.exfantasy.server.models.UserEntity;
 import com.exfantasy.server.service.UserManager;
 import com.exfantasy.server.vo.OpResult;
 
@@ -21,7 +21,7 @@ public class UserController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String userPage(Model model) {
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new UserEntity());
 		return "user";
 	}
 	
@@ -39,7 +39,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/find-by-email", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public User findByEmail(@RequestParam("email") String email) {
+	public UserEntity findByEmail(@RequestParam("email") String email) {
 		return userManager.findByEmail(email);
 	}
 }

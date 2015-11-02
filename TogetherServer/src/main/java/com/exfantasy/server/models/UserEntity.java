@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,10 +28,10 @@ public class User {
 	@Size(min = 1, max = 30)
 	private String name;
 	
-	public User() {
+	public UserEntity() {
 	}
 	
-	public User(String email, String password, String name) {
+	public UserEntity(String email, String password, String name) {
 		this.email = email;
 		this.password = password;
 		this.name = name;

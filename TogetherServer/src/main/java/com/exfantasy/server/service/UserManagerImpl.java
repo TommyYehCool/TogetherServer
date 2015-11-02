@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.exfantasy.server.models.User;
+import com.exfantasy.server.models.UserEntity;
 import com.exfantasy.server.models.UserRepository;
 import com.exfantasy.server.vo.OpResult;
 import com.exfantasy.server.vo.ResultCode;
@@ -22,11 +22,11 @@ public class UserManagerImpl implements UserManager {
 	public OpResult register(String email, String password, String name) {
 		logger.info("Processing user register...");
 		
-		User user = new User(email, password, name);
+		UserEntity user = new UserEntity(email, password, name);
 		try {
 			logger.info("Prepare to register " + user);
 			
-			User existUser = userDao.findByEmail(email);
+			UserEntity existUser = userDao.findByEmail(email);
 			if (existUser != null) {
 				String errMsg = "Email: <" + email + "> already used";
 				return new OpResult(ResultCode.REGISTER_FAEILD_EMAIL_ALREADY_USED, errMsg);
@@ -52,7 +52,7 @@ public class UserManagerImpl implements UserManager {
 		
 		logger.info("Prepare to find user by email: <" + email + ">");
 
-		User user = userDao.findByEmail(email);
+		UserEntity user = userDao.findByEmail(email);
 		if (user != null) {
 			logger.info("Found " + user);
 
@@ -76,10 +76,10 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public User findByEmail(String email) {
+	public UserEntity findByEmail(String email) {
 		logger.info("Prepare to find user by email: <" + email + ">");
 
-		User user = userDao.findByEmail(email);
+		UserEntity user = userDao.findByEmail(email);
 		if (user != null) {
 			logger.info("Found: " + user);
 		}

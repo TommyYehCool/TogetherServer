@@ -1,9 +1,9 @@
 package com.exfantasy.server.service;
 
-import com.exfantasy.server.models.Activity;
+import com.exfantasy.server.models.ActivityEntity;
 
 public interface ActivityManager {
-	public void create(Activity activity);
+	public void create(ActivityEntity activity);
 	
-	public void delete(Activity activity);
+	public void delete(ActivityEntity activity);
 }

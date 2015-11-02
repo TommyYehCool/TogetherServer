@@ -1,6 +1,6 @@
 package com.exfantasy.server.service;
 
-import com.exfantasy.server.models.User;
+import com.exfantasy.server.models.UserEntity;
 import com.exfantasy.server.vo.OpResult;
 
 public interface UserManager {
@@ -8,5 +8,5 @@ public interface UserManager {
 	
 	public OpResult login(String email, String password);
 
-	public User findByEmail(String email);
+	public UserEntity findByEmail(String email);
 }
