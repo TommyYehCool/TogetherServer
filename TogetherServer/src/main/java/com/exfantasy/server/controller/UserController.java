@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exfantasy.server.models.UserEntity;
 import com.exfantasy.server.service.UserManager;
+import com.exfantasy.server.vo.LoginResult;
 import com.exfantasy.server.vo.OpResult;
 
 @Controller
@@ -33,7 +34,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public OpResult login(String email, String password) {
+	public LoginResult login(String email, String password) {
 		return userManager.login(email, password);
 	}
 	

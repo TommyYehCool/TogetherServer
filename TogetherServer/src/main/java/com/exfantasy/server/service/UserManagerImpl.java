@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.exfantasy.server.models.UserEntity;
 import com.exfantasy.server.models.UserRepository;
+import com.exfantasy.server.vo.LoginResult;
 import com.exfantasy.server.vo.OpResult;
 import com.exfantasy.server.vo.ResultCode;
 
@@ -47,7 +48,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public OpResult login(String email, String password) {
+	public LoginResult login(String email, String password) {
 		logger.info("Processing email: <" + email + "> login...");
 		
 		logger.info("Prepare to find user by email: <" + email + ">");
@@ -60,18 +61,18 @@ public class UserManagerImpl implements UserManager {
 			if (!password.equals(userPassword)) {
 				String errMsg = "Input password not matched";
 				logger.warn(errMsg);
-				return new OpResult(ResultCode.LOGIN_FAILED_PASSWORD_INVALID, errMsg);
+				return new LoginResult(ResultCode.LOGIN_FAILED_PASSWORD_INVALID, "Enter password not matched");
 			}
 			
 			// password matched
 			logger.info(user + " login succeed");
 			
-			return new OpResult(ResultCode.SUCCEED);
+			return new LoginResult(ResultCode.SUCCEED, user.getName(), "http://xxx.xxx.xxx.xxx", user.getEmail());
 		}
 		else {
 			String errMsg = "Cannot find mapping user by email: <" + email + ">";
 			logger.warn(errMsg);
-			return new OpResult(ResultCode.LOGIN_FAILED_CANNOT_FIND_USER_BY_EMAIL, errMsg);
+			return new LoginResult(ResultCode.LOGIN_FAILED_CANNOT_FIND_USER_BY_EMAIL, errMsg);
 		}
 	}
 

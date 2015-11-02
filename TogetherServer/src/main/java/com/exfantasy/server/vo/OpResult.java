@@ -4,8 +4,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "op_result")
 public class OpResult {
+	/**
+	 * 操作結果
+	 */
 	private int resultCode;
-
+	/**
+	 * 操作結果訊息
+	 */
 	private String resultMsg;
 	
 	public OpResult() {
