@@ -1,8 +1,8 @@
 package com.exfantasy.server.vo;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "op_result")
 public class OpResult {
 	private int resultCode;
 
@@ -10,15 +10,12 @@ public class OpResult {
 	
 	public OpResult() {
 	}
-
-	@JsonCreator
-	public OpResult(@JsonProperty("resultCode") int resultCode) {
+	
+	public OpResult(int resultCode) {
 		this.resultCode = resultCode;
 	}
 	
-	@JsonCreator
-	public OpResult(@JsonProperty("resultCode") int resultCode, 
-					@JsonProperty("resultMsg") String resultMsg) {
+	public OpResult(int resultCode, String resultMsg) {
 		this.resultCode = resultCode;
 		this.resultMsg = resultMsg;
 	}
