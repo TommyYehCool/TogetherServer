@@ -20,7 +20,10 @@ $(document).ready(function() {
         	var currentPosLat = position.coords.latitude;
         	var currentPosLng = position.coords.longitude;
 			map.setCenter(currentPosLat, currentPosLng);
+
 			addMarker(currentPosLat, currentPosLng, 'You are here', 'Hello~~');
+			
+			drawRoute(currentPosLat, currentPosLng, tommyHomeLat, tommyHomeLng);
         },
         error: function(error){
 			alert('Geolocation failed: ' + error.message);
@@ -34,13 +37,24 @@ $(document).ready(function() {
 	});
 });
 
-function addMarker(latOfMarker, lngOfMarker, titleOfMarker, showText) {
+function addMarker(markerLat, markerLng, markerTitle, showText) {
 	map.addMarker({
-		lat : latOfMarker,
-		lng : lngOfMarker,
-        title: titleOfMarker,
+		lat : markerLat,
+		lng : markerLng,
+        title: markerTitle,
         infoWindow: {
         	content: '<p>' + showText + '</p>'
         }
+	});
+}
+
+function drawRoute(originLat, originLng, destLat, destLng) {
+	map.drawRoute({
+		origin: [originLat, originLng],
+		destination: [destLat, destLng],
+		travelMode: 'driving',
+		strokeColor: '#1DFA67',
+		strokerOpacity: 0.6,
+		strokeWeight: 6
 	});
 }
