@@ -53,7 +53,7 @@ function drawRoute(originLat, originLng, destLat, destLng) {
 		origin: [originLat, originLng],
 		destination: [destLat, destLng],
 		travelMode: 'driving',
-		strokeColor: '#1DFA67',
+		strokeColor: '#4E42F3',
 		strokerOpacity: 0.6,
 		strokeWeight: 6
 	});
