@@ -1,5 +1,6 @@
+var map;
+
 $(document).ready(function() {
-	var map;
 	var tommyHomeLat = 25.076237;
 	var tommyHomeLng = 121.480514
 	
@@ -11,14 +12,7 @@ $(document).ready(function() {
 	});
 	
 	// 在 Tommy 家新增一個 Marker
-	map.addMarker({
-		lat : tommyHomeLat,
-		lng : tommyHomeLng,
-        title: 'Tommy Home',
-        infoWindow: {
-          content: '<p>Sweet home of Tommy</p>'
-        }
-	});
+	addMarker(tommyHomeLat, tommyHomeLng, 'Tommy Home', 'Sweet home of Tommy')
 	
 	// 抓取目前的位置
 	GMaps.geolocate({
@@ -26,15 +20,7 @@ $(document).ready(function() {
         	var currentPosLat = position.coords.latitude;
         	var currentPosLng = position.coords.longitude;
 			map.setCenter(currentPosLat, currentPosLng);
-			
-			map.addMarker({
-				lat : currentPosLat,
-				lng : currentPosLng,
-		        title: 'You are here',
-		        infoWindow: {
-		          content: '<p>Hello~~</p>'
-		        }
-			});
+			addMarker(currentPosLat, currentPosLng, 'You are here', 'Hello~~');
         },
         error: function(error){
 			alert('Geolocation failed: ' + error.message);
@@ -47,3 +33,14 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function addMarker(latOfMarker, lngOfMarker, titleOfMarker, showText) {
+	map.addMarker({
+		lat : latOfMarker,
+		lng : lngOfMarker,
+        title: titleOfMarker,
+        infoWindow: {
+        	content: '<p>' + showText + '</p>'
+        }
+	});
+}
