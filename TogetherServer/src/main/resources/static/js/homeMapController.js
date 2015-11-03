@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 			addMarker(currentPosLat, currentPosLng, 'You are here', 'Hello~~');
 			
-			drawRoute(currentPosLat, currentPosLng, tommyHomeLat, tommyHomeLng);
+			drawRoute(currentPosLat, currentPosLng, tommyHomeLat, tommyHomeLng, '#4E42F3');
         },
         error: function(error){
 			alert('Geolocation failed: ' + error.message);
@@ -48,12 +48,12 @@ function addMarker(markerLat, markerLng, markerTitle, showText) {
 	});
 }
 
-function drawRoute(originLat, originLng, destLat, destLng) {
+function drawRoute(originLat, originLng, destLat, destLng, color) {
 	map.drawRoute({
 		origin: [originLat, originLng],
 		destination: [destLat, destLng],
 		travelMode: 'driving',
-		strokeColor: '#4E42F3',
+		strokeColor: color,
 		strokerOpacity: 0.6,
 		strokeWeight: 6
 	});
