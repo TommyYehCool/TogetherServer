@@ -1,5 +1,7 @@
 package com.exfantasy.server.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +41,11 @@ public class EventController {
 	@ResponseBody
 	public Event createEvent(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
 		return eventManager.create(latitude, longitude, name, content, attendeeNum, time);
+	}
+	
+	@RequestMapping(value = "/query", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public List<Event> queryEvents(double latitude, double longitude) {
+		return eventManager.query(latitude, longitude);
 	}
 }
