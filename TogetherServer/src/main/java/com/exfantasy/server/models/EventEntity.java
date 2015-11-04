@@ -38,6 +38,18 @@ public class EventEntity {
 	@NotNull
 	@Column(columnDefinition="Decimal(16,0) default '0'")
 	private long time;
+	
+	public EventEntity() {
+	}
+	
+	public EventEntity(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.name = name;
+		this.content = content;
+		this.attendeeNum = attendeeNum;
+		this.time = time;
+	}
 
 	public long getId() {
 		return id;

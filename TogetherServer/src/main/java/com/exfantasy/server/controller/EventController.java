@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exfantasy.server.models.EventEntity;
 import com.exfantasy.server.service.EventManager;
+import com.exfantasy.server.vo.Event;
 
 @Controller
 @RequestMapping(value = "/event")
@@ -31,23 +32,12 @@ public class EventController {
 	@RequestMapping(value = "/create-from-web", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String createEvent(@ModelAttribute EventEntity event, Model model) {
-		try {
-			logger.info("Prepare to create " + event);
-			
-			eventManager.create(event);
-			
-			String succeedMsg = "Create " + event + " succeed!";
-
-			logger.info(succeedMsg);
-			
-			return succeedMsg;
-		} 
-		catch (Exception e) {
-			String failedMsg = "Create " + event + " failed, err-msg: <" + e.getMessage() + ">";
-
-			logger.warn(failedMsg);
-			
-			return failedMsg;
-		}
+		return eventManager.create(event);
+	}
+	
+	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public Event createEvent(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+		return eventManager.create(latitude, longitude, name, content, attendeeNum, time);
 	}
 }
