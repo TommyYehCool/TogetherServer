@@ -10,7 +10,7 @@
 
 	<body>
 		<h1>新增事件</h1>
-	    <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
+	    <form action="#" th:action="@{/event/create-from-web}" th:object="${event}" method="post">
 	    	<div class="form-group">
 	    		<label for="inputLatitude">緯度</label> 
 	    		<input type="text" class="form-control" id="inputLatitude" placeholder="Enter latitude" th:field="*{latitude}" />

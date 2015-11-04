@@ -28,7 +28,7 @@ public class EventController {
 		return "event";
 	}
 	
-	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/create-from-web", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String createEvent(@ModelAttribute EventEntity event, Model model) {
 		try {
