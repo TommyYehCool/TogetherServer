@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-	    <title>Event</title>
-	    <link th:substituteby="common/tag :: header_link" />
+		<title>Event</title>
+  		<object th:include="common/tag :: common_header" th:remove="tag" ></object>
 	</head>
 
 	<body>
@@ -36,8 +36,5 @@
 	        <button type="submit" class="btn btn-defaule">Submit</button> 
 	        <button type="reset" class="btn btn-default">Reset</button>
 	    </form>
-	    
-	    <!-- Load script at the end of the body, will speed up the page loading -->
-		<div th:substituteby="common/tag :: body_tail"></div>
 	</body>
 </html>

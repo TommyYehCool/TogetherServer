@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<title>Try Google Map</title>
-		<link th:substituteby="common/tag :: header_link" />
+		<title>Home</title>
+		<object th:include="common/tag :: common_header" th:remove="tag" ></object>
 
 		<link href="css/home.css" rel="stylesheet" type="text/css" />
 	  	<style type="text/css">
@@ -208,7 +208,6 @@
 		</div>
 	
 		<!-- Load script at the end of the body, will speed up the page loading -->
-		<div th:substituteby="common/tag :: body_tail"></div>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 	 	<script type="text/javascript" src="js/gmaps.js"></script>
 	 	<script type="text/javascript" src="js/homeMapController.js"></script>
