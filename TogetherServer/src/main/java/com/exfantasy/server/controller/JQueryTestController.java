@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/jQueryTest")
-public class jQueryTestController {
+public class JQueryTestController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String greetingForm() {
