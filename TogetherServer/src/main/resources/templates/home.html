@@ -1,10 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+	<div th:include="fragments/js :: jquerys"></div>
+	<div th:include="fragments/js :: bootstrap"></div>
+
 	<head>
 		<title>Home</title>
-		<object th:include="common/tag :: common_header" th:remove="tag" ></object>
+		<object th:include="fragments/header :: common_header" th:remove="tag" ></object>
 
-		<link href="css/home.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="css/carousel.css" />
 	  	<style type="text/css">
 	    	#map {
 	      		width: 100%;
@@ -208,8 +211,7 @@
 		</div>
 	
 		<!-- Load script at the end of the body, will speed up the page loading -->
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	 	<script type="text/javascript" src="js/gmaps.js"></script>
-	 	<script type="text/javascript" src="js/homeMapController.js"></script>
+		<script type="text/javascript" src="js/homeMapController.js"></script>
+		<div th:include="fragments/js :: googlemap"></div>
 	</body>
 </html>
