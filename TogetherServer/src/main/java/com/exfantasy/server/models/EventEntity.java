@@ -7,11 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "activities")
-public class ActivityEntity {
+@Table(name = "events")
+public class EventEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -25,16 +24,20 @@ public class ActivityEntity {
 	private double longitude;
 	
 	@NotNull
-	@Size(min = 1, max = 30)
+	@Column(columnDefinition="varchar(50) default ''")
 	private String name;
 	
 	@NotNull
-	@Column(columnDefinition="Decimal(3,0) default '0'")
-	private int numberOfPeople;
+	@Column(columnDefinition="varchar(200) default ''")
+	private String content;
 	
 	@NotNull
-	@Size(min = 1, max = 50)
-	private String remark;
+	@Column(columnDefinition="Decimal(5,0) default '0'")
+	private int attendeeNum;
+	
+	@NotNull
+	@Column(columnDefinition="Decimal(16,0) default '0'")
+	private long time;
 
 	public long getId() {
 		return id;
@@ -68,25 +71,33 @@ public class ActivityEntity {
 		this.name = name;
 	}
 
-	public int getNumberOfPeople() {
-		return numberOfPeople;
+	public String getContent() {
+		return content;
 	}
 
-	public void setNumberOfPeople(int numberOfPeople) {
-		this.numberOfPeople = numberOfPeople;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public String getRemark() {
-		return remark;
+	public int getAttendeeNum() {
+		return attendeeNum;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setAttendeeNum(int attendeeNum) {
+		this.attendeeNum = attendeeNum;
+	}
+
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long time) {
+		this.time = time;
 	}
 
 	@Override
 	public String toString() {
-		return "Activity [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
-				+ ", numberOfPeople=" + numberOfPeople + ", remark=" + remark + "]";
+		return "EventEntity [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
+				+ ", content=" + content + ", attendeeNum=" + attendeeNum + ", time=" + time + "]";
 	}
 }

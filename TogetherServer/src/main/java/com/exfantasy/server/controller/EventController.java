@@ -10,40 +10,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.exfantasy.server.models.ActivityEntity;
-import com.exfantasy.server.service.ActivityManager;
+import com.exfantasy.server.models.EventEntity;
+import com.exfantasy.server.service.EventManager;
 
 @Controller
-@RequestMapping(value = "/activity")
-public class ActivityController {
+@RequestMapping(value = "/event")
+public class EventController {
 
-	private static final Logger logger = LoggerFactory.getLogger(ActivityController.class);
+	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 	
 	@Autowired
-	private ActivityManager activityManager;
+	private EventManager eventManager;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String activityPage(Model model) {
-		model.addAttribute("activity", new ActivityEntity());
-		return "activity";
+	public String returnEventPage(Model model) {
+		model.addAttribute("event", new EventEntity());
+		return "event";
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String createActivity(@ModelAttribute ActivityEntity activity, Model model) {
+	public String createEvent(@ModelAttribute EventEntity event, Model model) {
 		try {
-			logger.info("Prepare to create " + activity);
+			logger.info("Prepare to create " + event);
 			
-			activityManager.create(activity);
+			eventManager.create(event);
 			
-			String succeedMsg = "Create " + activity + " succeed!";
+			String succeedMsg = "Create " + event + " succeed!";
 
 			logger.info(succeedMsg);
 			
 			return succeedMsg;
 		} 
 		catch (Exception e) {
-			String failedMsg = "Create " + activity + " failed, err-msg: <" + e.getMessage() + ">";
+			String failedMsg = "Create " + event + " failed, err-msg: <" + e.getMessage() + ">";
 
 			logger.warn(failedMsg);
 			

@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-	    <title>Activity</title>
+	    <title>Event</title>
 	    <link th:substituteby="common/tag :: header_link" />
 	</head>
 
 	<body>
-		<h1>新增活動</h1>
-	    <form action="#" th:action="@{/activity/create}" th:object="${activity}" method="post">
+		<h1>新增事件</h1>
+	    <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
 	    	<div class="form-group">
 	    		<label for="inputLatitude">緯度</label> 
 	    		<input type="text" class="form-control" id="inputLatitude" placeholder="Enter latitude" th:field="*{latitude}" />
@@ -19,19 +19,19 @@
 	        </div>
 	        
 	        <div class="form-group">
-	        	<label for="inputName">活動名稱</label> 
+	        	<label for="inputName">事件名稱</label> 
 	        	<input type="text" class="form-control" id="inputName" placeholder="Enter name" th:field="*{name}" />
 	        </div>
 	        
 	        <div class="form-group">
-	        	<label for="inputNumberOfPeople">人數</label>
-	        	<input type="text" class="form-control" id="inputNumberOfPeople" placeholder="Enter number of people" th:field="*{numberOfPeople}" />
-	        </div>
+  				<label for="inputContent">內容</label>
+  				<textarea class="form-control" rows="5" id="inputContent" th:field="*{content}"></textarea>
+			</div>
 	        
 	        <div class="form-group">
-  				<label for="comment">說明</label>
-  				<textarea class="form-control" rows="5" id="comment" th:field="*{remark}"></textarea>
-			</div>
+	        	<label for="inputAttendeeNum">人數</label>
+	        	<input type="text" class="form-control" id="inputAttendeeNum" placeholder="Enter number of people" th:field="*{attendeeNum}" />
+	        </div>
 	        
 	        <button type="submit" class="btn btn-defaule">Submit</button> 
 	        <button type="reset" class="btn btn-default">Reset</button>
