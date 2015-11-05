@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.exfantasy.server.models.EventEntity;
 import com.exfantasy.server.models.EventRepository;
 import com.exfantasy.server.vo.Event;
+import com.exfantasy.server.vo.OpResult;
+import com.exfantasy.server.vo.ResultCode;
 
 @Service
 public class EventManagerImpl implements EventManager {
@@ -42,7 +44,7 @@ public class EventManagerImpl implements EventManager {
 	}
 
 	@Override
-	public Event create(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+	public OpResult create(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
 		EventEntity eventEntity = new EventEntity(latitude, longitude, name, content, attendeeNum, time);
 		try {
 			logger.info("Prepare to create " + eventEntity);
@@ -51,12 +53,14 @@ public class EventManagerImpl implements EventManager {
 
 			logger.info("Create " + eventEntity + " succeed!");
 			
-			return new Event(latitude, longitude, name, content, attendeeNum, time);
+			return new OpResult(ResultCode.SUCCEED);
 		} 
 		catch (Exception e) {
-			logger.warn("Create " + eventEntity + " failed, err-msg: <" + e.getMessage() + ">");
+			String errorMsg = "Create " + eventEntity + " failed, err-msg: <" + e.getMessage() + ">";
 			
-			return null;
+			logger.warn(errorMsg);
+			
+			return new OpResult(ResultCode.CREATE_EVENT_FAILED, errorMsg);
 		}
 	}
 

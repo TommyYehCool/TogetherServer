@@ -36,7 +36,7 @@ public class EventEntity {
 	private int attendeeNum;
 	
 	@NotNull
-	@Column(columnDefinition="Decimal(16,0) default '0'")
+	@Column(columnDefinition="Decimal(17,0) default '0'")
 	private long time;
 	
 	public EventEntity() {
