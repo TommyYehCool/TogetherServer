@@ -32,7 +32,7 @@ public class FileController {
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
-	public String handleFileUpload(@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
+	public String handleFileUpload(@RequestParam("name") String name, @RequestParam("uploadfile") MultipartFile file) {
 		if (!STORE_FILE_PATH.endsWith("/")) {
 			STORE_FILE_PATH += "/";
 		}
