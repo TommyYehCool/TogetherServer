@@ -26,13 +26,14 @@
     	    processData: false,
     	    contentType: false,
     	    cache: false,
-    	    success: function () {
+    	    dataType:'text',
+    	    success: function (response) {
     	      // Handle upload success
-    	    	$("#upload-file-message").text("File succesfully uploaded");
+    	    	$("#upload-file-message").text(response);
     	    },
-    	    error: function () {
+    	    error: function (response) {
     	      // Handle upload error
-    	    	$("#upload-file-message").text("File not uploaded (perhaps it's too much big)"); 
+    	    	$("#upload-file-message").text(response); 
 
     	    }
     	  });
