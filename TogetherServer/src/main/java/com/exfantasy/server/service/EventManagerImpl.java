@@ -1,5 +1,6 @@
 package com.exfantasy.server.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -66,8 +67,15 @@ public class EventManagerImpl implements EventManager {
 
 	@Override
 	public List<Event> query(double latitude, double longitude) {
-		// TODO 查詢附近事件
-		return null;
+		Iterable<EventEntity> allEvents = eventDao.findAll();
+		List<Event> lstAllEvents = new ArrayList<Event>();
+		for (EventEntity eventEntity : allEvents) {
+			lstAllEvents.add(
+				new Event(eventEntity.getLatitude(), eventEntity.getLongitude(), eventEntity.getName(), 
+						  eventEntity.getContent(), eventEntity.getAttendeeNum(), eventEntity.getTime())
+			);
+		}
+		return lstAllEvents;
 	}
 
 }
