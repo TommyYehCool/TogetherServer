@@ -5,7 +5,7 @@
 	
 	<head>
 	    <title>Testing upload file</title>
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <object th:include="fragments/header :: common_header" th:remove="tag" ></object>
 	    <script>
     	$(document).ready(function () {
     		
@@ -43,18 +43,37 @@
 	
 	<body>
 		<form action="/file/upload" enctype="multipart/form-data" method="post">
-			<p>File to upload by submit: <input type="file" name="uploadfile" /></p> 
-			<p>Name: <input type="text" name="name" /></p> 
-			<p><input type="submit" value="Upload" /> Press here to upload the file!</p>
+			<div class="form-group">
+				<label for="upload-file-input">File to upload by submit:</label>
+				<input id="upload-file-input" type="file" name="uploadfile"/>
+			</div>
+			<div class="form-group">
+				<label for="upload-file-name">File name:</label>
+				<input id="upload-file-name" type="text" name="name" class="form-control" placeholder="Enter name"/>
+			</div>
+			<div class="form-group">
+				<label for="Upload">Press here to upload the file!</label> 
+				<br />
+				<input id="Upload" type="submit" value="Upload" class="btn btn-default"/>
+			</div>
 		</form>
 		
 		<!-- Upload file form -->
 		<form id="upload-file-form">
-  			<label for="upload-file-input">Upload your file by ajax:</label>
-  			<p><input id="upload-file-input" type="file" name="uploadfile" accept="*" /></p>
-  			<p>Name: <input type="text" name="name" /></p>
-  			<p><input id="uploadBtn" type="button" value="Upload" /> Press here to upload the file!</p>
-  			<p><span id="upload-file-message"></span></p>
+			<div class="form-group">
+				<label for="upload-file-input">Upload your file by ajax:</label>
+				<input id="upload-file-input" type="file" name="uploadfile" accept="*" />
+			</div>
+  			<div class="form-group">
+				<label for="upload-file-name">Name:</label>
+				<input id="upload-file-name" type="text" name="name" class="form-control" placeholder="Enter name"/>
+			</div>
+  			<div class="form-group">
+  				<label for="Upload">Press here to upload the file!</label> 
+				<br />
+  				<input id="uploadBtn" type="button" value="Upload" class="btn btn-default"/>
+  				<span id="upload-file-message"></span>
+  			</div>
 		</form>
 	</body>
 </html>
