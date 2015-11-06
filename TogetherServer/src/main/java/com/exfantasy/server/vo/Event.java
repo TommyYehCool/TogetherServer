@@ -36,7 +36,8 @@ public class Event {
 	public Event() {
 	}
 	
-	public Event(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+	public Event(long id, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+		this.id = id;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.name = name;
@@ -103,7 +104,7 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "EventEntity [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
+		return "Event [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
 				+ ", content=" + content + ", attendeeNum=" + attendeeNum + ", time=" + time + "]";
 	}
 }

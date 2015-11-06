@@ -46,7 +46,7 @@ public class EventController {
 	
 	@RequestMapping(value = "/query", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public List<Event> queryEvents(double latitude, double longitude) {
+	public Event[] queryEvents(double latitude, double longitude) {
 		return eventManager.query(latitude, longitude);
 	}
 }

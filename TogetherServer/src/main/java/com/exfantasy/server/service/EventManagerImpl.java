@@ -66,16 +66,17 @@ public class EventManagerImpl implements EventManager {
 	}
 
 	@Override
-	public List<Event> query(double latitude, double longitude) {
+	public Event[] query(double latitude, double longitude) {
 		Iterable<EventEntity> allEvents = eventDao.findAll();
 		List<Event> lstAllEvents = new ArrayList<Event>();
 		for (EventEntity eventEntity : allEvents) {
 			lstAllEvents.add(
-				new Event(eventEntity.getLatitude(), eventEntity.getLongitude(), eventEntity.getName(), 
-						  eventEntity.getContent(), eventEntity.getAttendeeNum(), eventEntity.getTime())
+				new Event(eventEntity.getId(), eventEntity.getLatitude(), eventEntity.getLongitude(), 
+						  eventEntity.getName(), eventEntity.getContent(), eventEntity.getAttendeeNum(), 
+						  eventEntity.getTime())
 			);
 		}
-		return lstAllEvents;
+		return lstAllEvents.toArray(new Event[0]);
 	}
 
 }
