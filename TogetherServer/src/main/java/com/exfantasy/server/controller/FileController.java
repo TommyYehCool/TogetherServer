@@ -36,6 +36,10 @@ public class FileController {
 		if (!STORE_FILE_PATH.endsWith("/")) {
 			STORE_FILE_PATH += "/";
 		}
+		File folder = new File(STORE_FILE_PATH);
+		if (!folder.isDirectory()) {
+			folder.mkdirs();
+		}
 		
 		if (!file.isEmpty()) {
 			BufferedOutputStream stream = null;
