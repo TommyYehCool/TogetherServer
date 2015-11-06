@@ -10,4 +10,6 @@ public class ResultCode {
 	
 	public static final int LOGIN_FAILED_CANNOT_FIND_USER_BY_EMAIL = 2000;
 	public static final int LOGIN_FAILED_PASSWORD_INVALID = 2001;
+	
+	public static final int CREATE_EVENT_FAILED = 3000;
 }
