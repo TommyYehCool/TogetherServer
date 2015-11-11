@@ -30,7 +30,7 @@ public class UserManagerImpl implements UserManager {
 			UserEntity existUser = userDao.findByEmail(email);
 			if (existUser != null) {
 				String errMsg = "Email: <" + email + "> already used";
-				return new OpResult(ResultCode.REGISTER_FAEILD_EMAIL_ALREADY_USED, errMsg);
+				return new OpResult(ResultCode.REGISTER_FAILED_EMAIL_ALREADY_USED, errMsg);
 			}
 			
 			userDao.save(user);
