@@ -43,7 +43,7 @@ public class EventEntity {
 	@Column(columnDefinition="Decimal(17,0) default '0'")
 	private long time;
 	
-	@ManyToMany(cascade=CascadeType.ALL, mappedBy="eventEntitys")
+	@ManyToMany(mappedBy="eventEntitys")
     private Set<UserEntity> userEntitys;
 	
 	public EventEntity() {

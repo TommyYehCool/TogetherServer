@@ -34,7 +34,7 @@ public class UserEntity {
 	@Size(min = 1, max = 30)
 	private String name;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany
     @JoinTable(
         name="user_event",
         joinColumns={@JoinColumn(name="user_fk")},
