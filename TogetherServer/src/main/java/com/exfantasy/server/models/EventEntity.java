@@ -1,10 +1,14 @@
 package com.exfantasy.server.models;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -13,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class EventEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long event_id;
 	
 	@NotNull
 	@Column(columnDefinition="Decimal(10,6) default '0.0'")
@@ -39,6 +43,9 @@ public class EventEntity {
 	@Column(columnDefinition="Decimal(17,0) default '0'")
 	private long time;
 	
+	@ManyToMany(cascade=CascadeType.ALL, mappedBy="eventEntitys")
+    private Set<UserEntity> userEntitys;
+	
 	public EventEntity() {
 	}
 	
@@ -51,12 +58,12 @@ public class EventEntity {
 		this.time = time;
 	}
 
-	public long getId() {
-		return id;
+	public long getEventId() {
+		return event_id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setEventId(long event_id) {
+		this.event_id = event_id;
 	}
 
 	public double getLatitude() {
@@ -107,9 +114,17 @@ public class EventEntity {
 		this.time = time;
 	}
 
+	public Set<UserEntity> getUserEntitys() {
+		return userEntitys;
+	}
+
+	public void setUserEntitys(Set<UserEntity> userEntitys) {
+		this.userEntitys = userEntitys;
+	}
+
 	@Override
 	public String toString() {
-		return "EventEntity [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
+		return "EventEntity [event_id=" + event_id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
 				+ ", content=" + content + ", attendeeNum=" + attendeeNum + ", time=" + time + "]";
 	}
 }

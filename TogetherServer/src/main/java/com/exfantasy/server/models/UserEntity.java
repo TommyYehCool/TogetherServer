@@ -1,9 +1,15 @@
 package com.exfantasy.server.models;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,7 +20,7 @@ public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long user_id;
 
 	@NotNull
 	@Size(min = 10, max = 30)
@@ -28,6 +34,14 @@ public class UserEntity {
 	@Size(min = 1, max = 30)
 	private String name;
 	
+	@ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(
+        name="user_event",
+        joinColumns={@JoinColumn(name="user_fk")},
+        inverseJoinColumns={@JoinColumn(name="event_fk")}
+    )
+    private Set<EventEntity> eventEntitys;
+	
 	public UserEntity() {
 	}
 	
@@ -37,12 +51,12 @@ public class UserEntity {
 		this.name = name;
 	}
 
-	public long getId() {
-		return id;
+	public long getUserId() {
+		return user_id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setUserId(long user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getEmail() {
@@ -69,8 +83,16 @@ public class UserEntity {
 		this.name = name;
 	}
 
+	public Set<EventEntity> getEventEntitys() {
+		return eventEntitys;
+	}
+
+	public void setEventEntitys(Set<EventEntity> eventEntitys) {
+		this.eventEntitys = eventEntitys;
+	}
+	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + "]";
+		return "User [user_id=" + user_id + ", email=" + email + ", password=" + password + ", name=" + name + "]";
 	}
 }
