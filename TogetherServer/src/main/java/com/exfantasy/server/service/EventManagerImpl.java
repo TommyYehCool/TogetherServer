@@ -25,18 +25,18 @@ public class EventManagerImpl implements EventManager {
 	@Override
 	public String create(EventEntity eventEntity) {
 		try {
-			logger.info("Prepare to create " + eventEntity);
+			logger.info(">>>>> Prepare to create " + eventEntity);
 			
 			eventDao.save(eventEntity);
 
-			String succeedMsg = "Create " + eventEntity + " succeed!";
+			String succeedMsg = "<<<<< Create " + eventEntity + " succeed!";
 
 			logger.info(succeedMsg);
 			
 			return succeedMsg;
 		} 
 		catch (Exception e) {
-			String failedMsg = "Create " + eventEntity + " failed, err-msg: <" + e.getMessage() + ">";
+			String failedMsg = "<<<<< Create " + eventEntity + " failed, err-msg: <" + e.getMessage() + ">";
 
 			logger.warn(failedMsg);
 			
@@ -45,19 +45,19 @@ public class EventManagerImpl implements EventManager {
 	}
 
 	@Override
-	public OpResult create(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+	public OpResult create(long userId, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
 		EventEntity eventEntity = new EventEntity(latitude, longitude, name, content, attendeeNum, time);
 		try {
-			logger.info("Prepare to create " + eventEntity);
+			logger.info(">>>>> Prepare to create " + eventEntity + " by userId: <" + userId + ">");
 			
 			eventDao.save(eventEntity);
 
-			logger.info("Create " + eventEntity + " succeed!");
+			logger.info("<<<<< Create " + eventEntity + " succeed!");
 			
 			return new OpResult(ResultCode.SUCCEED);
 		} 
 		catch (Exception e) {
-			String errorMsg = "Create " + eventEntity + " failed, err-msg: <" + e.getMessage() + ">";
+			String errorMsg = "<<<<< Create " + eventEntity + " failed, err-msg: <" + e.getMessage() + ">";
 			
 			logger.warn(errorMsg);
 			

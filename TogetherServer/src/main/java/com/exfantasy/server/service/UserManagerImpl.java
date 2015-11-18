@@ -21,11 +21,11 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public OpResult register(String email, String password, String name) {
-		logger.info("Processing user register...");
+		logger.info(">>>>> Processing user register...");
 		
 		UserEntity user = new UserEntity(email, password, name);
 		try {
-			logger.info("Prepare to register " + user);
+			logger.info("Prepare to find user by email: <" + email + ">");
 			
 			UserEntity existUser = userDao.findByEmail(email);
 			if (existUser != null) {
@@ -35,7 +35,7 @@ public class UserManagerImpl implements UserManager {
 			
 			userDao.save(user);
 
-			String succeedMsg = "Register " + user + " succeed";
+			String succeedMsg = "<<<<< Register " + user + " succeed";
 			logger.info(succeedMsg);
 
 			return new OpResult(ResultCode.SUCCEED);
@@ -49,7 +49,7 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public LoginResult login(String email, String password) {
-		logger.info("Processing email: <" + email + "> login...");
+		logger.info(">>>>> Processing email: <" + email + "> login...");
 		
 		logger.info("Prepare to find user by email: <" + email + ">");
 
@@ -65,12 +65,12 @@ public class UserManagerImpl implements UserManager {
 			}
 			
 			// password matched
-			logger.info(user + " login succeed");
+			logger.info("<<<<< " + user + " login succeed");
 			
 			return new LoginResult(ResultCode.SUCCEED, user.getUserId(), user.getName(), user.getEmail(), "http://xxx.xxx.xxx.xxx/xxx.jpg");
 		}
 		else {
-			String errMsg = "Cannot find mapping user by email: <" + email + ">";
+			String errMsg = "<<<<< Cannot find mapping user by email: <" + email + ">";
 			logger.warn(errMsg);
 			return new LoginResult(ResultCode.LOGIN_FAILED_CANNOT_FIND_USER_BY_EMAIL, errMsg);
 		}
@@ -78,14 +78,14 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public UserEntity findByEmail(String email) {
-		logger.info("Prepare to find user by email: <" + email + ">");
+		logger.info(">>>>> Prepare to find user by email: <" + email + ">");
 
 		UserEntity user = userDao.findByEmail(email);
 		if (user != null) {
-			logger.info("Found: " + user);
+			logger.info("<<<<< Found: " + user);
 		}
 		else {
-			logger.warn("Not found: " + email);
+			logger.warn("<<<<< Not found: " + email);
 		}
 		return user;
 	}
