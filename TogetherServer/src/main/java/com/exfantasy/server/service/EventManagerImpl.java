@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.exfantasy.server.models.EventEntity;
 import com.exfantasy.server.models.EventRepository;
+import com.exfantasy.server.models.UserRepository;
 import com.exfantasy.server.vo.Event;
 import com.exfantasy.server.vo.OpResult;
 import com.exfantasy.server.vo.ResultCode;
@@ -21,6 +22,9 @@ public class EventManagerImpl implements EventManager {
 
 	@Autowired
 	private EventRepository eventDao;
+	
+	@Autowired
+	private UserRepository userDao;
 	
 	@Override
 	public String create(EventEntity eventEntity) {
@@ -51,7 +55,11 @@ public class EventManagerImpl implements EventManager {
 			logger.info(">>>>> Prepare to create " + eventEntity + " by userId: <" + userId + ">");
 			
 			eventDao.save(eventEntity);
-
+			
+			eventEntity.getUserEntitys().add(userDao.findOne(userId));
+			
+			eventDao.save(eventEntity);
+			
 			logger.info("<<<<< Create " + eventEntity + " succeed!");
 			
 			return new OpResult(ResultCode.SUCCEED);
