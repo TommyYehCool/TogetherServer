@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -34,12 +32,7 @@ public class UserEntity {
 	@Size(min = 1, max = 30)
 	private String name;
 	
-	@ManyToMany
-    @JoinTable(
-        name="user_event",
-        joinColumns={@JoinColumn(name="user_fk")},
-        inverseJoinColumns={@JoinColumn(name="event_fk")}
-    )
+	@ManyToMany(mappedBy="userEntitys")
     private Set<EventEntity> eventEntitys = new HashSet<EventEntity>();
 	
 	public UserEntity() {

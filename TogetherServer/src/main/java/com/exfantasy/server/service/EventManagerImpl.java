@@ -50,7 +50,7 @@ public class EventManagerImpl implements EventManager {
 
 	@Override
 	public OpResult create(long userId, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
-		EventEntity eventEntity = new EventEntity(latitude, longitude, name, content, attendeeNum, time);
+		EventEntity eventEntity = new EventEntity(userId, latitude, longitude, name, content, attendeeNum, time);
 		try {
 			logger.info(">>>>> Prepare to create " + eventEntity + " by userId: <" + userId + ">");
 			

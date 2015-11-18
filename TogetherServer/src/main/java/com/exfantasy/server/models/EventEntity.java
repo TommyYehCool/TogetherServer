@@ -8,9 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "events")
@@ -18,6 +21,10 @@ public class EventEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long event_id;
+	
+	@NotNull
+//	@Size(max = 20)
+	private long create_user_id;
 	
 	@NotNull
 	@Column(columnDefinition="Decimal(10,6) default '0.0'")
@@ -43,13 +50,19 @@ public class EventEntity {
 	@Column(columnDefinition="Decimal(17,0) default '0'")
 	private long time;
 	
-	@ManyToMany(mappedBy="eventEntitys")
+	@ManyToMany
+    @JoinTable(
+        name="event_user",
+        joinColumns=@JoinColumn(name="event_fk"),
+        inverseJoinColumns=@JoinColumn(name="user_fk")
+    )
     private Set<UserEntity> userEntitys = new HashSet<UserEntity>();
 	
 	public EventEntity() {
 	}
 	
-	public EventEntity(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+	public EventEntity(long create_user_id, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+		this.create_user_id = create_user_id;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.name = name;
@@ -64,6 +77,14 @@ public class EventEntity {
 
 	public void setEventId(long event_id) {
 		this.event_id = event_id;
+	}
+
+	public long getCreate_user_id() {
+		return create_user_id;
+	}
+
+	public void setCreate_user_id(long create_user_id) {
+		this.create_user_id = create_user_id;
 	}
 
 	public double getLatitude() {
@@ -124,7 +145,7 @@ public class EventEntity {
 
 	@Override
 	public String toString() {
-		return "EventEntity [event_id=" + event_id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
+		return "EventEntity [event_id=" + event_id + ", create_user_id=" + create_user_id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
 				+ ", content=" + content + ", attendeeNum=" + attendeeNum + ", time=" + time + "]";
 	}
 }
