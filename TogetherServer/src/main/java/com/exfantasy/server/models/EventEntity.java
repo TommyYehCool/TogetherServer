@@ -13,7 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "events")
@@ -23,7 +22,6 @@ public class EventEntity {
 	private long event_id;
 	
 	@NotNull
-//	@Size(max = 20)
 	private long create_user_id;
 	
 	@NotNull
@@ -61,8 +59,8 @@ public class EventEntity {
 	public EventEntity() {
 	}
 	
-	public EventEntity(long create_user_id, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
-		this.create_user_id = create_user_id;
+	public EventEntity(long createUserId, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+		this.create_user_id = createUserId;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.name = name;
@@ -79,12 +77,12 @@ public class EventEntity {
 		this.event_id = event_id;
 	}
 
-	public long getCreate_user_id() {
+	public long getCreateUserId() {
 		return create_user_id;
 	}
 
-	public void setCreate_user_id(long create_user_id) {
-		this.create_user_id = create_user_id;
+	public void setCreateUserId(long createUserId) {
+		this.create_user_id = createUserId;
 	}
 
 	public double getLatitude() {
