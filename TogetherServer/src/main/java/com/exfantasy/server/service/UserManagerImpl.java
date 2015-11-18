@@ -67,7 +67,7 @@ public class UserManagerImpl implements UserManager {
 			// password matched
 			logger.info(user + " login succeed");
 			
-			return new LoginResult(ResultCode.SUCCEED, user.getName(), "http://xxx.xxx.xxx.xxx", user.getEmail());
+			return new LoginResult(ResultCode.SUCCEED, user.getUserId(), user.getName(), user.getEmail(), "http://xxx.xxx.xxx.xxx/xxx.jpg");
 		}
 		else {
 			String errMsg = "Cannot find mapping user by email: <" + email + ">";
