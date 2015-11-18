@@ -1,8 +1,8 @@
 package com.exfantasy.server.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,7 +40,7 @@ public class UserEntity {
         joinColumns={@JoinColumn(name="user_fk")},
         inverseJoinColumns={@JoinColumn(name="event_fk")}
     )
-    private Set<EventEntity> eventEntitys;
+    private Set<EventEntity> eventEntitys = new HashSet<EventEntity>();
 	
 	public UserEntity() {
 	}
