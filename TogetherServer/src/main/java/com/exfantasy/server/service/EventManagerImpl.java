@@ -54,8 +54,6 @@ public class EventManagerImpl implements EventManager {
 		try {
 			logger.info(">>>>> Prepare to create " + eventEntity + " by userId: <" + userId + ">");
 			
-			eventDao.save(eventEntity);
-			
 			eventEntity.getUserEntitys().add(userDao.findOne(userId));
 			
 			eventDao.save(eventEntity);
