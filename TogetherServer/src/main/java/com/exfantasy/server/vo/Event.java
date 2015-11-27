@@ -4,107 +4,125 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "event")
 public class Event {
-	/**
-	 * 事件 ID
-	 */
-	private long id;
-	/**
-	 * 緯度
-	 */
-	private double latitude;
-	/**
-	 * 經度
-	 */
-	private double longitude;
-	/**
-	 * 事件名稱
-	 */
-	private String name;
-	/**
-	 * 事件內容
-	 */
-	private String content;
-	/**
-	 * 參加人數
-	 */
-	private int attendeeNum;
-	/**
-	 * 事件時間
-	 */
-	private long time;
-	
-	public Event() {
-	}
-	
-	public Event(long id, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
-		this.id = id;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.name = name;
-		this.content = content;
-		this.attendeeNum = attendeeNum;
-		this.time = time;
-	}
+    /**
+     * 事件 ID
+     */
+    private long eventId;
+    /**
+     * 建立事件使用者 ID
+     */
+    private long createUserId;
+    /**
+     * 緯度
+     */
+    private double latitude;
+    /**
+     * 經度
+     */
+    private double longitude;
+    /**
+     * 事件名稱
+     */
+    private String name;
+    /**
+     * 事件內容
+     */
+    private String content;
+    /**
+     * 參加人數
+     */
+    private int attendeeNum;
+    /**
+     * 事件時間
+     */
+    private long time;
 
-	public long getId() {
-		return id;
-	}
+    public Event() {
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Event(double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+        this(0, 0, latitude, longitude, name, content, attendeeNum, time);
+    }
 
-	public double getLatitude() {
-		return latitude;
-	}
+    public Event(long eventId, long createUserId, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+        this.eventId = eventId;
+        this.createUserId = createUserId;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.name = name;
+        this.content = content;
+        this.attendeeNum = attendeeNum;
+        this.time = time;
+    }
 
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
+    public long getEventId() {
+        return eventId;
+    }
 
-	public double getLongitude() {
-		return longitude;
-	}
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
+    }
 
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
+    public long getCreateUserId() {
+        return createUserId;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setCreateUserId(long createUserId) {
+        this.createUserId = createUserId;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public double getLatitude() {
+        return latitude;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public double getLongitude() {
+        return longitude;
+    }
 
-	public int getAttendeeNum() {
-		return attendeeNum;
-	}
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 
-	public void setAttendeeNum(int attendeeNum) {
-		this.attendeeNum = attendeeNum;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public long getTime() {
-		return time;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setTime(long time) {
-		this.time = time;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	@Override
-	public String toString() {
-		return "Event [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
-				+ ", content=" + content + ", attendeeNum=" + attendeeNum + ", time=" + time + "]";
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getAttendeeNum() {
+        return attendeeNum;
+    }
+
+    public void setAttendeeNum(int attendeeNum) {
+        this.attendeeNum = attendeeNum;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Event [eventId=" + eventId + ", createUserId=" + createUserId + ", latitude=" + latitude
+                + ", longitude=" + longitude + ", name=" + name + ", content=" + content + ", attendeeNum="
+                + attendeeNum + ", time=" + time + "]";
+    }
 }

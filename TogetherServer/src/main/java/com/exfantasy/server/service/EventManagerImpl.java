@@ -77,7 +77,8 @@ public class EventManagerImpl implements EventManager {
 		List<Event> lstAllEvents = new ArrayList<Event>();
 		for (EventEntity eventEntity : allEvents) {
 			lstAllEvents.add(
-				new Event(eventEntity.getEventId(), eventEntity.getLatitude(), eventEntity.getLongitude(), 
+				new Event(eventEntity.getEventId(), eventEntity.getCreateUserId(), 
+						  eventEntity.getLatitude(), eventEntity.getLongitude(), 
 						  eventEntity.getName(), eventEntity.getContent(), eventEntity.getAttendeeNum(), 
 						  eventEntity.getTime())
 			);

@@ -19,10 +19,10 @@ import javax.validation.constraints.NotNull;
 public class EventEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long event_id;
+	private long eventId;
 	
 	@NotNull
-	private long create_user_id;
+	private long createUserId;
 	
 	@NotNull
 	@Column(columnDefinition="Decimal(10,6) default '0.0'")
@@ -60,7 +60,7 @@ public class EventEntity {
 	}
 	
 	public EventEntity(long createUserId, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
-		this.create_user_id = createUserId;
+		this.createUserId = createUserId;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.name = name;
@@ -70,19 +70,19 @@ public class EventEntity {
 	}
 
 	public long getEventId() {
-		return event_id;
+		return eventId;
 	}
 
-	public void setEventId(long event_id) {
-		this.event_id = event_id;
+	public void setEventId(long eventId) {
+		this.eventId = eventId;
 	}
 
 	public long getCreateUserId() {
-		return create_user_id;
+		return createUserId;
 	}
 
 	public void setCreateUserId(long createUserId) {
-		this.create_user_id = createUserId;
+		this.createUserId = createUserId;
 	}
 
 	public double getLatitude() {
@@ -143,7 +143,8 @@ public class EventEntity {
 
 	@Override
 	public String toString() {
-		return "EventEntity [event_id=" + event_id + ", create_user_id=" + create_user_id + ", latitude=" + latitude + ", longitude=" + longitude + ", name=" + name
-				+ ", content=" + content + ", attendeeNum=" + attendeeNum + ", time=" + time + "]";
+		return "EventEntity [eventId=" + eventId + ", createUserId=" + createUserId + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", name=" + name + ", content=" + content + ", attendeeNum="
+				+ attendeeNum + ", time=" + time + ", userEntitys=" + userEntitys + "]";
 	}
 }
