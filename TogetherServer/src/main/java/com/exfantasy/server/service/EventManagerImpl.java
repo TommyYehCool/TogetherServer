@@ -1,6 +1,7 @@
 package com.exfantasy.server.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,10 +11,12 @@ import org.springframework.stereotype.Service;
 
 import com.exfantasy.server.models.EventEntity;
 import com.exfantasy.server.models.EventRepository;
+import com.exfantasy.server.models.UserEntity;
 import com.exfantasy.server.models.UserRepository;
 import com.exfantasy.server.vo.Event;
 import com.exfantasy.server.vo.OpResult;
 import com.exfantasy.server.vo.ResultCode;
+import com.exfantasy.server.vo.User;
 
 @Service
 public class EventManagerImpl implements EventManager {
@@ -74,14 +77,27 @@ public class EventManagerImpl implements EventManager {
 	@Override
 	public Event[] query(double latitude, double longitude) {
 		Iterable<EventEntity> allEvents = eventDao.findAll();
+
 		List<Event> lstAllEvents = new ArrayList<Event>();
 		for (EventEntity eventEntity : allEvents) {
-			lstAllEvents.add(
-				new Event(eventEntity.getEventId(), eventEntity.getCreateUserId(), 
-						  eventEntity.getLatitude(), eventEntity.getLongitude(), 
-						  eventEntity.getName(), eventEntity.getContent(), eventEntity.getAttendeeNum(), 
-						  eventEntity.getTime())
-			);
+			Iterator<UserEntity> it = eventEntity.getUserEntitys().iterator();
+			
+			Event event =
+					new Event(eventEntity.getEventId(), eventEntity.getCreateUserId(), 
+							  eventEntity.getLatitude(), eventEntity.getLongitude(), 
+							  eventEntity.getName(), eventEntity.getContent(), eventEntity.getAttendeeNum(), 
+							  eventEntity.getTime()); 
+			
+			while (it.hasNext()) {
+				UserEntity userEntity = it.next();
+				
+				User user 
+					= new User(userEntity.getUserId(), userEntity.getEmail(), userEntity.getName());
+				
+				event.addUser(user);
+			}
+			
+			lstAllEvents.add(event);
 		}
 		return lstAllEvents.toArray(new Event[0]);
 	}
