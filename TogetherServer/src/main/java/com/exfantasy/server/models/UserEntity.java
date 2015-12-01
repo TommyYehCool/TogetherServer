@@ -18,7 +18,7 @@ public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long user_id;
+	private long userId;
 
 	@NotNull
 	@Size(min = 10, max = 30)
@@ -45,11 +45,11 @@ public class UserEntity {
 	}
 
 	public long getUserId() {
-		return user_id;
+		return userId;
 	}
 
-	public void setUserId(long user_id) {
-		this.user_id = user_id;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public String getEmail() {
@@ -86,6 +86,6 @@ public class UserEntity {
 	
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", email=" + email + ", password=" + password + ", name=" + name + "]";
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name + "]";
 	}
 }
