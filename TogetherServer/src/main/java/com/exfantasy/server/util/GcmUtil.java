@@ -18,7 +18,7 @@ public class GcmUtil {
 		
 		jData.put("message", "Hello from Tommy's Spring Server");
 		
-		jGcmData.put("to", "/topic/global");
+		jGcmData.put("to", "/topics/global");
 		jGcmData.put("data", jData);
 		
 		try {
