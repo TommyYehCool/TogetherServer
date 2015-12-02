@@ -1,36 +1,50 @@
 package com.exfantasy.server.util;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-import org.springframework.util.StringUtils;
-
-import com.google.android.gcm.server.InvalidRequestException;
-import com.google.android.gcm.server.Message;
-import com.google.android.gcm.server.Result;
-import com.google.android.gcm.server.Sender;
+import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
 
 public class GcmUtil {
-	private static final String GCM_API_KEY = "AIzaSyAFEDkHc4KGtuq5Jjh88qP3y_Q8dKBf0aQ";
+	private static final String API_KEY = "AIzaSyAFEDkHc4KGtuq5Jjh88qP3y_Q8dKBf0aQ";
 
 	public static void test() {
-		Sender sender = new Sender(GCM_API_KEY);
+		JSONObject jGcmData = new JSONObject();
+		JSONObject jData = new JSONObject();
 		
-		Message msg = new Message.Builder().addData("message", "Hello from Spring Server").build();
+		jData.put("message", "Hello from Tommy's Spring Server");
+		
+		jGcmData.put("to", "/topic/global");
+		jGcmData.put("data", jData);
 		
 		try {
-			Result result = sender.send(msg, "978444275273", 3);
-			
-			String errorCdName = result.getErrorCodeName();
-			if (StringUtils.isEmpty(errorCdName)) {
-				System.out.println("GCM notification is sent successfully, " + result.toString());
-				return;
-			}
-			System.out.println("Error occurred while sending push notification :" + result.getErrorCodeName());
+			// Crate connection to send GCM Message request
+			URL url = new URL("https://android.googleapis.com/gcm/send");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestProperty("Authorization", "key=" + API_KEY);
+	        conn.setRequestProperty("Content-Type", "application/json");
+	        conn.setRequestMethod("POST");
+	        conn.setDoOutput(true);
+	        
+	        // Send GCM message content.
+            OutputStream outputStream = conn.getOutputStream();
+            outputStream.write(jGcmData.toString().getBytes());
 
-		} catch (InvalidRequestException e) {
-            System.out.println("Invalid Request");
-        } catch (IOException e) {
-            System.out.println("IO Exception");
-        }
+            // Read GCM response.
+            InputStream inputStream = conn.getInputStream();
+            String resp = IOUtils.toString(inputStream);
+            System.out.println(resp);
+            System.out.println("Check your device/emulator for notification or logcat for " +
+                    "confirmation of the receipt of the GCM message.");
+		} catch (IOException e) {
+			System.out.println("Unable to send GCM message.");
+            System.out.println("Please ensure that API_KEY has been replaced by the server " +
+                    "API key, and that the device's registration token is correct (if specified).");
+            e.printStackTrace();
+		}
 	}
 }
