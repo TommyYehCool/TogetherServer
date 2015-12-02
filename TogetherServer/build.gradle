@@ -31,6 +31,8 @@ dependencies {
 	compile("mysql:mysql-connector-java")
 	
 	compile("org.springframework.boot:spring-boot-starter-mail")
+
+	compile("com.ganyo:gcm-server:1.0.2")
 	
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 }
