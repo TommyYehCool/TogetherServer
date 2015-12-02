@@ -14,7 +14,12 @@ public class GcmController {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	@ResponseBody
 	public String sendGcm() {
-		GcmUtil.test();
-		return "Send Gcm done";
+		boolean sendResult = GcmUtil.sendGcmMessage("global", "It's time to go home!!");
+		if (sendResult) {
+			return "Send GCM notification message succeed";
+		}
+		else {
+			return "Send GCM notification message failed";
+		}
 	}
 }

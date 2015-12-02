@@ -8,17 +8,22 @@ import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GcmUtil {
+
+	private static final Logger logger = LoggerFactory.getLogger(GcmUtil.class);
+	
 	private static final String API_KEY = "AIzaSyAFEDkHc4KGtuq5Jjh88qP3y_Q8dKBf0aQ";
 
-	public static void test() {
+	public static boolean sendGcmMessage(String topic, String message) {
 		JSONObject jGcmData = new JSONObject();
 		JSONObject jData = new JSONObject();
 		
-		jData.put("message", "Hello from Tommy's Spring Server");
+		jData.put("message", message);
 		
-		jGcmData.put("to", "/topics/global");
+		jGcmData.put("to", "/topics/" + topic);
 		jGcmData.put("data", jData);
 		
 		try {
@@ -37,14 +42,13 @@ public class GcmUtil {
             // Read GCM response.
             InputStream inputStream = conn.getInputStream();
             String resp = IOUtils.toString(inputStream);
-            System.out.println(resp);
-            System.out.println("Check your device/emulator for notification or logcat for " +
-                    "confirmation of the receipt of the GCM message.");
+            logger.info("GCM response: " + resp);
+            logger.info("Check your device/emulator for notification or logcat for confirmation of the receipt of the GCM message");
+            return true;
 		} catch (IOException e) {
-			System.out.println("Unable to send GCM message.");
-            System.out.println("Please ensure that API_KEY has been replaced by the server " +
-                    "API key, and that the device's registration token is correct (if specified).");
-            e.printStackTrace();
+			logger.error("Unable to send GCM message, err-msg: <" + e.getMessage() + ">", e);
+			logger.error("Please ensure that API_KEY has been replaced by the server API key, and that the device's registration token is correct (if specified)");
+			return false;
 		}
 	}
 }
