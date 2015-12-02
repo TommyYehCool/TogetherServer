@@ -11,6 +11,11 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * https://github.com/googlesamples/google-services/blob/master/android/gcm/gcmsender/src/main/java/gcm/play/android/samples/com/gcmsender/GcmSender.java 
+ * 
+ * @author Tommy
+ */
 public class GcmUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(GcmUtil.class);
@@ -18,6 +23,8 @@ public class GcmUtil {
 	private static final String API_KEY = "AIzaSyAFEDkHc4KGtuq5Jjh88qP3y_Q8dKBf0aQ";
 
 	public static boolean sendGcmMessage(String topic, String message) {
+		logger.info("Prepare to send message: <" + message + "> to Topic: <" + topic + ">...");
+		
 		JSONObject jGcmData = new JSONObject();
 		JSONObject jData = new JSONObject();
 		
@@ -42,12 +49,12 @@ public class GcmUtil {
             // Read GCM response.
             InputStream inputStream = conn.getInputStream();
             String resp = IOUtils.toString(inputStream);
-            logger.info("GCM response: " + resp);
-            logger.info("Check your device/emulator for notification or logcat for confirmation of the receipt of the GCM message");
+
+            logger.info("Send GCM message succeed, GCM response: " + resp);
+
             return true;
 		} catch (IOException e) {
 			logger.error("Unable to send GCM message, err-msg: <" + e.getMessage() + ">", e);
-			logger.error("Please ensure that API_KEY has been replaced by the server API key, and that the device's registration token is correct (if specified)");
 			return false;
 		}
 	}
