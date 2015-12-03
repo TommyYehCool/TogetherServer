@@ -32,11 +32,17 @@ public class FileController {
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
-	public String handleFileUpload(@RequestParam("name") String name, @RequestParam("uploadfile") MultipartFile file) {
+	public String handleFileUpload(@RequestParam("email") String email, @RequestParam("uploadfile") MultipartFile file) {
+		if (email.isEmpty()) {
+			return "Upload failed with empty email";
+		}
+		
 		if (!STORE_FILE_PATH.endsWith("/")) {
 			STORE_FILE_PATH += "/";
 		}
-		File folder = new File(STORE_FILE_PATH);
+		String userFolderPath = STORE_FILE_PATH + email + "/";
+		
+		File folder = new File(userFolderPath);
 		if (!folder.isDirectory()) {
 			folder.mkdirs();
 		}
@@ -44,28 +50,32 @@ public class FileController {
 		if (!file.isEmpty()) {
 			BufferedOutputStream stream = null;
 			try {
-				String originalFilename = file.getOriginalFilename();
-				String extName = originalFilename.substring(originalFilename.lastIndexOf("."), originalFilename.length());
+				File fileToStore = new File(userFolderPath + file.getOriginalFilename());
+				if (fileToStore.exists()) {
+					fileToStore.delete();
+				}
 				
 				byte[] bytes = file.getBytes();
-				stream = new BufferedOutputStream(new FileOutputStream(new File(STORE_FILE_PATH + name + extName)));
+				stream = new BufferedOutputStream(new FileOutputStream(fileToStore));
 	            stream.write(bytes);
-	            return "You successfully uploaded " + name + "!";
+	            return "Upload succeed!";
 	        } 
 			catch (Exception e) {
-	            return "You failed to upload " + name + " => " + e.getMessage();
+	            return "Upload failed with exception, msg: " + e.toString();
 	        }
 			finally {
-				try {
-					stream.close();
-				} 
-				catch (IOException e) {
-					logger.error("IOException raised while closing IOStream, err-msg: <" + e.getMessage() + ">");
+				if (stream != null) {
+					try {
+						stream.close();
+					} 
+					catch (IOException e) {
+						logger.error("IOException raised while closing IOStream, err-msg: <" + e.getMessage() + ">");
+					}
 				}
 			}
 	    } 
 		else {
-	        return "You failed to upload " + name + " because the file was empty.";
+	        return "Upload failed due to empty file";
 	    }
 	}
 }
