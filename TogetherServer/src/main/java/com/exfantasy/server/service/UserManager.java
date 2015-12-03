@@ -10,4 +10,6 @@ public interface UserManager {
 	public LoginResult login(String email, String password);
 
 	public UserEntity findByEmail(String email);
+	
+	public UserEntity[] findAllUsers();
 }

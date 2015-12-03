@@ -1,5 +1,8 @@
 package com.exfantasy.server.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +91,15 @@ public class UserManagerImpl implements UserManager {
 			logger.warn("<<<<< Not found: " + email);
 		}
 		return user;
+	}
+
+	@Override
+	public UserEntity[] findAllUsers() {
+		Iterable<UserEntity> itAllUsers = userDao.findAll();
+		List<UserEntity> listAllUsers = new ArrayList<UserEntity>();
+		for (UserEntity user : itAllUsers) {
+			listAllUsers.add(user);
+		}
+		return listAllUsers.toArray(new UserEntity[0]);
 	}
 }
