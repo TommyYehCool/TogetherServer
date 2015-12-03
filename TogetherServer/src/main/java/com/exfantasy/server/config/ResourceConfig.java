@@ -40,7 +40,5 @@ public class ResourceConfig extends WebMvcConfigurerAdapter {
 			}
 			registry.addResourceHandler("/" + userEmail + "/**").addResourceLocations("file:" + userFolderPath);
 		}
-		
-		registry.addResourceHandler("/xxx/**").addResourceLocations("file:" + STORE_FILE_PATH + "xxx/");
 	}
 }
