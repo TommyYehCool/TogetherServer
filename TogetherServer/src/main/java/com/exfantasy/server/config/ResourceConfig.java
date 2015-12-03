@@ -30,12 +30,16 @@ public class ResourceConfig extends WebMvcConfigurerAdapter {
 		
 		for (UserEntity user : allUsers) {
 			String userEmail = user.getEmail();
-			String userFolderPath = STORE_FILE_PATH + userEmail;
+			
+			// FIXME 這邊再看看要不要用個亂碼取代 userEmail, 免得被破解
+			String userFolderPath = STORE_FILE_PATH + userEmail + "/";
 			File userFolder = new File(userFolderPath);
 			if (!userFolder.isDirectory()) {
 				userFolder.mkdirs();
 			}
 			registry.addResourceHandler("/" + userEmail + "/**").addResourceLocations("file:" + userFolderPath);
 		}
+		
+		registry.addResourceHandler("/xxx/**").addResourceLocations("file:" + STORE_FILE_PATH + "xxx/");
 	}
 }
