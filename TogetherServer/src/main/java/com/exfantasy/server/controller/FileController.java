@@ -33,7 +33,10 @@ public class FileController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
 	public String fileUpload(@RequestParam("email") String email, @RequestParam("uploadfile") MultipartFile file) {
+		logger.info("Handle email: <" + email + "> upload file...");
+		
 		if (email.isEmpty()) {
+			logger.warn("Email: <" + email + "> is empty, cannot upload file");
 			return "Upload failed with empty email";
 		}
 		
@@ -58,9 +61,14 @@ public class FileController {
 				byte[] bytes = file.getBytes();
 				stream = new BufferedOutputStream(new FileOutputStream(fileToStore));
 	            stream.write(bytes);
+	            
+	            logger.info("Email: <" + email + "> upload file succeed");
+	            
 	            return "Upload succeed!";
 	        } 
 			catch (Exception e) {
+				logger.info("Email: <" + email + "> upload file failed with exception, msg: " + e.toString());
+				
 	            return "Upload failed with exception, msg: " + e.toString();
 	        }
 			finally {
@@ -75,6 +83,8 @@ public class FileController {
 			}
 	    } 
 		else {
+			logger.warn("Email: <" + email + "> upload empty file");
+			
 	        return "Upload failed due to empty file";
 	    }
 	}
