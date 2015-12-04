@@ -11,6 +11,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import com.exfantasy.server.models.UserEntity;
 import com.exfantasy.server.service.UserManager;
 
+/**
+ * 定義某個網址對應到電腦的某個資料夾
+ * 
+ * @author Tommy
+ */
 @Configuration
 public class ResourceConfig extends WebMvcConfigurerAdapter {
 	

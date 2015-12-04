@@ -21,7 +21,7 @@ public class UserController {
 	private UserManager userManager;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String userPage(Model model) {
+	public String returnUserPage(Model model) {
 		model.addAttribute("user", new UserEntity());
 		return "user";
 	}

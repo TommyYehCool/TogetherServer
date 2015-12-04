@@ -26,13 +26,13 @@ public class FileController {
 	private String STORE_FILE_PATH;
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public String fileUpload(Model model) {
+	public String returnFileUploadPage(Model model) {
 		return "file_upload";
 	}
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
-	public String handleFileUpload(@RequestParam("email") String email, @RequestParam("uploadfile") MultipartFile file) {
+	public String fileUpload(@RequestParam("email") String email, @RequestParam("uploadfile") MultipartFile file) {
 		if (email.isEmpty()) {
 			return "Upload failed with empty email";
 		}
@@ -78,4 +78,5 @@ public class FileController {
 	        return "Upload failed due to empty file";
 	    }
 	}
+	
 }
