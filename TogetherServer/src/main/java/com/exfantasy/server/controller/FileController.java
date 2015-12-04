@@ -113,6 +113,8 @@ public class FileController {
 		Path path = Paths.get(requestFilePath);
 		try {
 			fileBytes = Files.readAllBytes(path);
+			
+			logger.warn("<<<<< Email: <" + email + "> file-name: <" + fileName + "> with path: <" + requestFilePath + "> transfer to byte array succeed, length: <" + fileBytes.length + ">");
 		} 
 		catch (IOException e) {
 			logger.warn("<<<<< Email: <" + email + "> file-name: <" + fileName + "> with path: <" + requestFilePath + "> failed with IOException, msg: <" + e.toString() + ">", e);
