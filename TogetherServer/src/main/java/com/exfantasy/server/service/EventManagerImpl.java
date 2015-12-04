@@ -52,12 +52,12 @@ public class EventManagerImpl implements EventManager {
 	}
 
 	@Override
-	public OpResult create(long userId, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
-		EventEntity eventEntity = new EventEntity(userId, latitude, longitude, name, content, attendeeNum, time);
+	public OpResult create(long createUserId, double latitude, double longitude, String name, String content, int attendeeNum, int date, int time) {
+		EventEntity eventEntity = new EventEntity(createUserId, latitude, longitude, name, content, attendeeNum, date, time);
 		try {
-			logger.info(">>>>> Prepare to create " + eventEntity + " by userId: <" + userId + ">");
+			logger.info(">>>>> Prepare to create " + eventEntity + " by userId: <" + createUserId + ">");
 			
-			eventEntity.getUserEntitys().add(userDao.findOne(userId));
+			eventEntity.getUserEntitys().add(userDao.findOne(createUserId));
 			
 			eventDao.save(eventEntity);
 			
@@ -86,7 +86,7 @@ public class EventManagerImpl implements EventManager {
 					new Event(eventEntity.getEventId(), eventEntity.getCreateUserId(), 
 							  eventEntity.getLatitude(), eventEntity.getLongitude(), 
 							  eventEntity.getName(), eventEntity.getContent(), eventEntity.getAttendeeNum(), 
-							  eventEntity.getTime()); 
+							  eventEntity.getDate(), eventEntity.getTime()); 
 			
 			while (it.hasNext()) {
 				UserEntity userEntity = it.next();

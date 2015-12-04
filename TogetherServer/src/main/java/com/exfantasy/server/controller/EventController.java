@@ -38,8 +38,8 @@ public class EventController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public OpResult createEvent(long userId, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
-		return eventManager.create(userId, latitude, longitude, name, content, attendeeNum, time);
+	public OpResult createEvent(long createUserId, double latitude, double longitude, String name, String content, int attendeeNum, int date, int time) {
+		return eventManager.create(createUserId, latitude, longitude, name, content, attendeeNum, date, time);
 	}
 	
 	@RequestMapping(value = "/query", method = RequestMethod.POST, produces = "application/json")

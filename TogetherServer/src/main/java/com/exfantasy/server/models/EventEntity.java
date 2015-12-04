@@ -45,8 +45,12 @@ public class EventEntity {
 	private int attendeeNum;
 	
 	@NotNull
-	@Column(columnDefinition="Decimal(17,0) default '0'")
-	private long time;
+	@Column(columnDefinition="Decimal(8,0) default '0'")
+	private int date;
+	
+	@NotNull
+	@Column(columnDefinition="Decimal(8,0) default '0'")
+	private int time;
 	
 	@ManyToMany
     @JoinTable(
@@ -59,13 +63,14 @@ public class EventEntity {
 	public EventEntity() {
 	}
 	
-	public EventEntity(long createUserId, double latitude, double longitude, String name, String content, int attendeeNum, long time) {
+	public EventEntity(long createUserId, double latitude, double longitude, String name, String content, int attendeeNum, int date, int time) {
 		this.createUserId = createUserId;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.name = name;
 		this.content = content;
 		this.attendeeNum = attendeeNum;
+		this.date = date;
 		this.time = time;
 	}
 
@@ -124,12 +129,20 @@ public class EventEntity {
 	public void setAttendeeNum(int attendeeNum) {
 		this.attendeeNum = attendeeNum;
 	}
+	
+	public int getDate() {
+		return date;
+	}
+	
+	public void setDate(int date) {
+		this.date = date;
+	}
 
-	public long getTime() {
+	public int getTime() {
 		return time;
 	}
 
-	public void setTime(long time) {
+	public void setTime(int time) {
 		this.time = time;
 	}
 
@@ -145,6 +158,7 @@ public class EventEntity {
 	public String toString() {
 		return "EventEntity [eventId=" + eventId + ", createUserId=" + createUserId + ", latitude=" + latitude
 				+ ", longitude=" + longitude + ", name=" + name + ", content=" + content + ", attendeeNum="
-				+ attendeeNum + ", time=" + time + ", userEntitys=" + userEntitys + "]";
+				+ attendeeNum + ", date=" + date + ", time=" + time + ", userEntitys=" + userEntitys + "]";
 	}
+
 }
