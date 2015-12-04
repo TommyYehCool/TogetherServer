@@ -31,19 +31,20 @@ public class EventManagerImpl implements EventManager {
 	
 	@Override
 	public String create(EventEntity eventEntity) {
+		String strEvent = eventEntity.toString();
 		try {
-			logger.info(">>>>> Prepare to create " + eventEntity);
+			logger.info(">>>>> Prepare to create " + strEvent);
 			
 			eventDao.save(eventEntity);
 
-			String succeedMsg = "<<<<< Create " + eventEntity + " succeed!";
+			String succeedMsg = "<<<<< Create " + strEvent + " succeed!";
 
 			logger.info(succeedMsg);
 			
 			return succeedMsg;
 		} 
 		catch (Exception e) {
-			String failedMsg = "<<<<< Create " + eventEntity + " failed, err-msg: <" + e.getMessage() + ">";
+			String failedMsg = "<<<<< Create " + strEvent + " failed, err-msg: <" + e.getMessage() + ">";
 
 			logger.warn(failedMsg);
 			
@@ -54,19 +55,21 @@ public class EventManagerImpl implements EventManager {
 	@Override
 	public OpResult create(long createUserId, double latitude, double longitude, String name, String content, int attendeeNum, int date, int time) {
 		EventEntity eventEntity = new EventEntity(createUserId, latitude, longitude, name, content, attendeeNum, date, time);
+		
+		String strEvent = eventEntity.toString();
 		try {
-			logger.info(">>>>> Prepare to create " + eventEntity + " by userId: <" + createUserId + ">");
+			logger.info(">>>>> Prepare to create " + strEvent + " by userId: <" + createUserId + ">");
 			
 			eventEntity.getUserEntitys().add(userDao.findOne(createUserId));
 			
 			eventDao.save(eventEntity);
 			
-			logger.info("<<<<< Create " + eventEntity + " succeed!");
+			logger.info("<<<<< Create " + strEvent + " succeed!");
 			
 			return new OpResult(ResultCode.SUCCEED);
 		} 
 		catch (Exception e) {
-			String errorMsg = "<<<<< Create " + eventEntity + " failed, err-msg: <" + e.getMessage() + ">";
+			String errorMsg = "<<<<< Create " + strEvent + " failed, err-msg: <" + e.getMessage() + ">";
 			
 			logger.warn(errorMsg);
 			

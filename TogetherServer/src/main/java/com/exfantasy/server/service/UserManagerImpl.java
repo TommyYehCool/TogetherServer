@@ -27,6 +27,8 @@ public class UserManagerImpl implements UserManager {
 		logger.info(">>>>> Processing user register...");
 		
 		UserEntity user = new UserEntity(email, password, name);
+		
+		String strUser = user.toString();
 		try {
 			logger.info("Prepare to find user by email: <" + email + ">");
 			
@@ -38,13 +40,13 @@ public class UserManagerImpl implements UserManager {
 			
 			userDao.save(user);
 
-			String succeedMsg = "<<<<< Register " + user + " succeed";
+			String succeedMsg = "<<<<< Register " + strUser + " succeed";
 			logger.info(succeedMsg);
 
 			return new OpResult(ResultCode.SUCCEED);
 		} 
 		catch (Exception ex) {
-			String errMsg = "Register " + user + " failed, err-msg: <" + ex.getMessage() + ">";
+			String errMsg = "Register " + strUser + " failed, err-msg: <" + ex.getMessage() + ">";
 			logger.warn(errMsg);
 			return new OpResult(ResultCode.SERVER_ERROR, errMsg);
 		}
@@ -58,7 +60,8 @@ public class UserManagerImpl implements UserManager {
 
 		UserEntity user = userDao.findByEmail(email);
 		if (user != null) {
-			logger.info("Found " + user);
+			String strUser = user.toString();
+			logger.info("Found " + strUser);
 
 			String userPassword = user.getPassword();
 			if (!password.equals(userPassword)) {
@@ -68,7 +71,7 @@ public class UserManagerImpl implements UserManager {
 			}
 			
 			// password matched
-			logger.info("<<<<< " + user + " login succeed");
+			logger.info("<<<<< " + strUser + " login succeed");
 			
 			return new LoginResult(ResultCode.SUCCEED, user.getUserId(), user.getName(), user.getEmail(), "http://xxx.xxx.xxx.xxx/xxx.jpg");
 		}
@@ -85,7 +88,8 @@ public class UserManagerImpl implements UserManager {
 
 		UserEntity user = userDao.findByEmail(email);
 		if (user != null) {
-			logger.info("<<<<< Found: " + user);
+			String strUser = user.toString();
+			logger.info("<<<<< Found " + strUser);
 		}
 		else {
 			logger.warn("<<<<< Not found: " + email);
