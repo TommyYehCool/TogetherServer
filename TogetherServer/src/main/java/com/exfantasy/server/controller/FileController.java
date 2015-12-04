@@ -4,6 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/file")
 public class FileController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MailController.class);
+	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	
 	@Value("${store.file.path}")
 	private String STORE_FILE_PATH;
@@ -33,7 +36,7 @@ public class FileController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
 	public String fileUpload(@RequestParam("email") String email, @RequestParam("uploadfile") MultipartFile file) {
-		logger.info("Handle email: <" + email + "> upload file...");
+		logger.info(">>>>> Processing email: <" + email + "> upload file...");
 		
 		if (email.isEmpty()) {
 			logger.warn("Email: <" + email + "> is empty, cannot upload file");
@@ -62,12 +65,12 @@ public class FileController {
 				stream = new BufferedOutputStream(new FileOutputStream(fileToStore));
 	            stream.write(bytes);
 	            
-	            logger.info("Email: <" + email + "> upload file succeed");
+	            logger.info("<<<<< Email: <" + email + "> upload file succeed");
 	            
 	            return "Upload succeed!";
 	        } 
 			catch (Exception e) {
-				logger.info("Email: <" + email + "> upload file failed with exception, msg: " + e.toString());
+				logger.info("<<<<< Email: <" + email + "> upload file failed with exception, msg: " + e.toString());
 				
 	            return "Upload failed with exception, msg: " + e.toString();
 	        }
@@ -83,10 +86,39 @@ public class FileController {
 			}
 	    } 
 		else {
-			logger.warn("Email: <" + email + "> upload empty file");
+			logger.warn("<<<<< Email: <" + email + "> upload empty file");
 			
 	        return "Upload failed due to empty file";
 	    }
 	}
 	
+	@RequestMapping(value = "/download", method = RequestMethod.POST)
+	@ResponseBody
+	public byte[] fileDownload(@RequestParam("email") String email, @RequestParam("file-name") String fileName) {
+		logger.info(">>>>> Processing Email: <" + email + ">, download file-name: <" + fileName + ">");
+		
+		if (!STORE_FILE_PATH.endsWith("/")) {
+			STORE_FILE_PATH += "/";
+		}
+		String userFolderPath = STORE_FILE_PATH + email + "/";
+		
+		String requestFilePath = userFolderPath + fileName;
+		File requestFile = new File(requestFilePath);
+		if (!requestFile.isFile()) {
+			logger.warn("<<<<< Email: <" + email + "> file-name: <" + fileName + "> with path: <" + requestFilePath + "> is not existed");
+			return null;
+		}
+		
+		byte[] fileBytes = null;
+		Path path = Paths.get(requestFilePath);
+		try {
+			fileBytes = Files.readAllBytes(path);
+		} 
+		catch (IOException e) {
+			logger.warn("<<<<< Email: <" + email + "> file-name: <" + fileName + "> with path: <" + requestFilePath + "> failed with IOException, msg: <" + e.toString() + ">", e);
+			return null;
+		}
+		
+		return fileBytes;
+	}
 }
