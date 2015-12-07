@@ -45,3 +45,9 @@ task wrapper(type: Wrapper) {
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
+
+startScripts {
+    doLast {
+        windowsScript.text = windowsScript.text.replace('DEFAULT_JVM_OPTS=', 'DEFAULT_JVM_OPTS=-Dfile.encoding="UTF-8"')
+    }
+}
