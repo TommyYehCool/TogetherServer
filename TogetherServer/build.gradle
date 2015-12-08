@@ -48,6 +48,7 @@ tasks.withType(JavaCompile) {
 
 startScripts {
     doLast {
-        windowsScript.text = windowsScript.text.replace('DEFAULT_JVM_OPTS=', 'DEFAULT_JVM_OPTS=-Dfile.encoding="UTF-8"')
+    	unixScript.text = unixScript.text.replace('DEFAULT_JVM_OPTS=', 'DEFAULT_JVM_OPTS=-Dfile.encoding=UTF-8')
+        windowsScript.text = windowsScript.text.replace('DEFAULT_JVM_OPTS=', 'DEFAULT_JVM_OPTS=-Dfile.encoding=UTF-8')
     }
 }
