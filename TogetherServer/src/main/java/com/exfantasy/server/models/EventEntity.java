@@ -156,7 +156,7 @@ public class EventEntity {
 
 	@Override
 	public String toString() {
-		return "EventEntity [eventId=" + eventId + ", createUserId=" + createUserId + ", latitude=" + latitude
+		return "Event [eventId=" + eventId + ", createUserId=" + createUserId + ", latitude=" + latitude
 				+ ", longitude=" + longitude + ", name=" + name + ", content=" + content + ", attendeeNum="
 				+ attendeeNum + ", date=" + date + ", time=" + time + ", userEntitys=" + userEntitys + "]";
 	}

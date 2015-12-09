@@ -11,4 +11,6 @@ public interface EventManager {
 
 	public Event[] query(double latitude, double longitude);
 
+	public OpResult join(long joinUserId, long eventId);
+
 }

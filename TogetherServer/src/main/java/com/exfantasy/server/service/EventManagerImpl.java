@@ -3,6 +3,7 @@ package com.exfantasy.server.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -103,6 +104,60 @@ public class EventManagerImpl implements EventManager {
 			lstAllEvents.add(event);
 		}
 		return lstAllEvents.toArray(new Event[0]);
+	}
+
+	@Override
+	public OpResult join(long joinUserId, long eventId) {
+		try {
+			logger.info(">>>>> Prepare to let userId: <" + joinUserId + "> join event with eventId: <" + eventId + ">");
+			
+			EventEntity event = eventDao.findOne(eventId);
+			if (event != null) {
+				logger.info("Found " + event);
+				
+				long createUserId = event.getCreateUserId();
+				if (createUserId == joinUserId) {
+					logger.error("<<<<< Cannot join event with createUserId: <" + createUserId + "> equals joinUserId: <" + joinUserId + ">");
+					return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_JOIN_USER_CREATED);
+				}
+				
+				Set<UserEntity> joinedUsers = event.getUserEntitys();
+				for (UserEntity joinedUser : joinedUsers) {
+					if (joinedUser.getUserId() == joinUserId) {
+						logger.error("<<<<< Cannot join event that joinUserId: <" + joinUserId + "> already joined");
+						return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_ALREADY_JOINED);
+					}
+				}
+			}
+			else {
+				logger.error("<<<<< Cannot find mapping event with eventId: <" + eventId + ">");
+				return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_EVENT_IS_NULL);
+			}
+			
+			UserEntity user = userDao.findOne(joinUserId);
+			if (user != null) {
+				logger.info("Found " + user);
+			}
+			else {
+				logger.error("<<<<< Cannot find mapping user with userId: <" + joinUserId + ">");
+				return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_USER_IS_NULL);
+			}
+			
+			event.getUserEntitys().add(user);
+			
+			eventDao.save(event);
+			
+			logger.info("<<<<< UserId: <" + joinUserId + "> join event with eventId: <" + eventId + "> succeed");
+			
+			return new OpResult(ResultCode.SUCCEED);
+		} 
+		catch (Exception e) {
+			String errorMsg = "<<<<< UserId: <" + joinUserId + "> join event with eventId: <" + eventId + "> failed, err-msg: <" + e.getMessage() + ">";
+			
+			logger.warn(errorMsg);
+			
+			return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_EXCEPTION, errorMsg);
+		}
 	}
 
 }

@@ -47,4 +47,10 @@ public class EventController {
 	public Event[] queryEvents(double latitude, double longitude) {
 		return eventManager.query(latitude, longitude);
 	}
+
+	@RequestMapping(value = "/join", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public OpResult joinEvent(long joinUserId, long eventId) {
+		return eventManager.join(joinUserId, eventId);
+	}
 }
