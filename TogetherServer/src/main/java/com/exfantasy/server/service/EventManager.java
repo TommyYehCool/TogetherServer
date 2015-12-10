@@ -5,7 +5,7 @@ import com.exfantasy.server.vo.Event;
 import com.exfantasy.server.vo.OpResult;
 
 public interface EventManager {
-	public String create(EventEntity event);
+	public String create(EventEntity eventEntity);
 
 	public OpResult create(long userId, double latitude, double longitude, String name, String content, int attendeeNum, int date, int time);
 

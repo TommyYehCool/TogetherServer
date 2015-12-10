@@ -83,9 +83,10 @@ public class UserEntity {
 	public void setEventEntitys(Set<EventEntity> eventEntitys) {
 		this.eventEntitys = eventEntitys;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name + "]";
+		return "UserEntity [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
+				+ ", eventEntitys=" + eventEntitys + "]";
 	}
 }

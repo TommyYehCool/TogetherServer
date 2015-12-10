@@ -58,7 +58,15 @@ public class EventEntity {
         joinColumns=@JoinColumn(name="event_fk"),
         inverseJoinColumns=@JoinColumn(name="user_fk")
     )
-    private Set<UserEntity> userEntitys = new HashSet<UserEntity>();
+    private Set<UserEntity> userEntitys = new HashSet<>();
+	
+	@ManyToMany
+	@JoinTable(
+		name="event_message",
+		joinColumns=@JoinColumn(name="event_fk"),
+		inverseJoinColumns=@JoinColumn(name="message_fk")
+	)
+	private Set<MessageEntity> messageEntitys = new HashSet<>();
 	
 	public EventEntity() {
 	}
@@ -153,12 +161,20 @@ public class EventEntity {
 	public void setUserEntitys(Set<UserEntity> userEntitys) {
 		this.userEntitys = userEntitys;
 	}
+	
+	public Set<MessageEntity> getMessageEntitys() {
+		return messageEntitys;
+	}
+
+	public void setMessageEntitys(Set<MessageEntity> messageEntitys) {
+		this.messageEntitys = messageEntitys;
+	}
 
 	@Override
 	public String toString() {
-		return "Event [eventId=" + eventId + ", createUserId=" + createUserId + ", latitude=" + latitude
+		return "EventEntity [eventId=" + eventId + ", createUserId=" + createUserId + ", latitude=" + latitude
 				+ ", longitude=" + longitude + ", name=" + name + ", content=" + content + ", attendeeNum="
-				+ attendeeNum + ", date=" + date + ", time=" + time + ", userEntitys=" + userEntitys + "]";
+				+ attendeeNum + ", date=" + date + ", time=" + time + ", userEntitys=" + userEntitys
+				+ ", messageEntitys=" + messageEntitys + "]";
 	}
-
 }

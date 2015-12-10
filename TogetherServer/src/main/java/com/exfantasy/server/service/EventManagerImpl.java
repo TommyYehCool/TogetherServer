@@ -111,40 +111,41 @@ public class EventManagerImpl implements EventManager {
 		try {
 			logger.info(">>>>> Prepare to let userId: <" + joinUserId + "> join event with eventId: <" + eventId + ">");
 			
+			// ---------- Process event logic ----------
 			EventEntity event = eventDao.findOne(eventId);
-			if (event != null) {
-				logger.info("Found " + event);
-				
-				long createUserId = event.getCreateUserId();
-				if (createUserId == joinUserId) {
-					logger.error("<<<<< Cannot join event with createUserId: <" + createUserId + "> equals joinUserId: <" + joinUserId + ">");
-					return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_JOIN_USER_CREATED);
-				}
-				
-				Set<UserEntity> joinedUsers = event.getUserEntitys();
-				for (UserEntity joinedUser : joinedUsers) {
-					if (joinedUser.getUserId() == joinUserId) {
-						logger.error("<<<<< Cannot join event that joinUserId: <" + joinUserId + "> already joined");
-						return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_ALREADY_JOINED);
-					}
-				}
-			}
-			else {
+			
+			if (event == null) {
 				logger.error("<<<<< Cannot find mapping event with eventId: <" + eventId + ">");
 				return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_EVENT_IS_NULL);
 			}
+
+			logger.info("Found " + event);
 			
-			UserEntity user = userDao.findOne(joinUserId);
-			if (user != null) {
-				logger.info("Found " + user);
+			long createUserId = event.getCreateUserId();
+			if (createUserId == joinUserId) {
+				logger.error("<<<<< Cannot join event with createUserId: <" + createUserId + "> equals joinUserId: <" + joinUserId + ">");
+				return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_JOIN_USER_CREATED);
 			}
-			else {
+			
+			Set<UserEntity> joinedUsers = event.getUserEntitys();
+			for (UserEntity joinedUser : joinedUsers) {
+				if (joinedUser.getUserId() == joinUserId) {
+					logger.error("<<<<< Cannot join event that joinUserId: <" + joinUserId + "> already joined");
+					return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_ALREADY_JOINED);
+				}
+			}
+			
+			// ---------- Process user logic ----------
+			UserEntity user = userDao.findOne(joinUserId);
+			if (user == null) {
 				logger.error("<<<<< Cannot find mapping user with userId: <" + joinUserId + ">");
 				return new OpResult(ResultCode.JOIN_EVENT_FAILED_WITH_USER_IS_NULL);
 			}
+
+			logger.info("Found " + user);
 			
+			// ---------- Event add User ----------
 			event.getUserEntitys().add(user);
-			
 			eventDao.save(event);
 			
 			logger.info("<<<<< UserId: <" + joinUserId + "> join event with eventId: <" + eventId + "> succeed");
