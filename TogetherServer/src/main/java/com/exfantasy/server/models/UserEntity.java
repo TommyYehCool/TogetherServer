@@ -87,6 +87,6 @@ public class UserEntity {
 	@Override
 	public String toString() {
 		return "UserEntity [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
-				+ ", eventEntitys=" + eventEntitys + "]";
+				+ ", join-event-counts=" + eventEntitys.size() + "]";
 	}
 }

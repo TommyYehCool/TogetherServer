@@ -174,7 +174,7 @@ public class EventEntity {
 	public String toString() {
 		return "EventEntity [eventId=" + eventId + ", createUserId=" + createUserId + ", latitude=" + latitude
 				+ ", longitude=" + longitude + ", name=" + name + ", content=" + content + ", attendeeNum="
-				+ attendeeNum + ", date=" + date + ", time=" + time + ", userEntitys=" + userEntitys
-				+ ", messageEntitys=" + messageEntitys + "]";
+				+ attendeeNum + ", date=" + date + ", time=" + time + ", user-counts=" + userEntitys.size()
+				+ ", message-counts=" + messageEntitys.size() + "]";
 	}
 }
