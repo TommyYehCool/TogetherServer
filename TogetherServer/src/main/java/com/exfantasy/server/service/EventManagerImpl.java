@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.exfantasy.server.models.EventEntity;
 import com.exfantasy.server.models.EventRepository;
+import com.exfantasy.server.models.MessageEntity;
 import com.exfantasy.server.models.UserEntity;
 import com.exfantasy.server.models.UserRepository;
 import com.exfantasy.server.vo.Event;
+import com.exfantasy.server.vo.Message;
 import com.exfantasy.server.vo.OpResult;
 import com.exfantasy.server.vo.ResultCode;
 import com.exfantasy.server.vo.User;
@@ -84,21 +86,32 @@ public class EventManagerImpl implements EventManager {
 
 		List<Event> lstAllEvents = new ArrayList<Event>();
 		for (EventEntity eventEntity : allEvents) {
-			Iterator<UserEntity> it = eventEntity.getUserEntitys().iterator();
-			
 			Event event =
 					new Event(eventEntity.getEventId(), eventEntity.getCreateUserId(), 
 							  eventEntity.getLatitude(), eventEntity.getLongitude(), 
 							  eventEntity.getName(), eventEntity.getContent(), eventEntity.getAttendeeNum(), 
 							  eventEntity.getDate(), eventEntity.getTime()); 
-			
-			while (it.hasNext()) {
-				UserEntity userEntity = it.next();
+
+			// 加入參加者
+			Iterator<UserEntity> itUser = eventEntity.getUserEntitys().iterator();
+			while (itUser.hasNext()) {
+				UserEntity userEntity = itUser.next();
 				
 				User user 
 					= new User(userEntity.getUserId(), userEntity.getEmail(), userEntity.getName());
 				
 				event.addUser(user);
+			}
+			
+			// 加入留言
+			Iterator<MessageEntity> itMsg = eventEntity.getMessageEntitys().iterator();
+			while (itMsg.hasNext()) {
+				MessageEntity msgEntity = itMsg.next();
+				
+				Message msg
+					= new Message(msgEntity.getMessageId(), msgEntity.getCreateUserId(), msgEntity.getContent(), msgEntity.getDate(), msgEntity.getTime());
+				
+				event.addMessage(msg);
 			}
 			
 			lstAllEvents.add(event);
