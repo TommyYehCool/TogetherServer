@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "messages")
@@ -17,6 +18,10 @@ public class MessageEntity {
 	
 	@NotNull
 	private long createUserId;
+	
+	@NotNull
+	@Size(min = 1, max = 30)
+	private String createUserName;
 	
 	@NotNull
 	@Column(columnDefinition="varchar(200) default ''")
@@ -56,6 +61,14 @@ public class MessageEntity {
 		this.createUserId = createUserId;
 	}
 
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -82,7 +95,8 @@ public class MessageEntity {
 
 	@Override
 	public String toString() {
-		return "MessageEntity [messageId=" + messageId + ", createUserId=" + createUserId + ", content=" + content
-				+ ", date=" + date + ", time=" + time + "]";
+		return "MessageEntity [messageId=" + messageId + ", createUserId=" + createUserId + ", createUserName="
+				+ createUserName + ", content=" + content + ", date=" + date + ", time=" + time + "]";
 	}
+
 }

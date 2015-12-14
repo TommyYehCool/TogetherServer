@@ -83,6 +83,8 @@ public class MessageManagerImpl implements MessageManager {
 			
 			logger.info("Found " + user);
 			
+			msgEntity.setCreateUserName(user.getName());
+			
 			// ---------- Save Message ----------
 			msgDao.save(msgEntity);
 			logger.info("Save " + msgEntity + " succeed");

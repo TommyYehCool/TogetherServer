@@ -109,7 +109,8 @@ public class EventManagerImpl implements EventManager {
 				MessageEntity msgEntity = itMsg.next();
 				
 				Message msg
-					= new Message(msgEntity.getMessageId(), msgEntity.getCreateUserId(), msgEntity.getContent(), msgEntity.getDate(), msgEntity.getTime());
+					= new Message(msgEntity.getMessageId(), msgEntity.getCreateUserId(), msgEntity.getCreateUserName(), 
+								  msgEntity.getContent(), msgEntity.getDate(), msgEntity.getTime());
 				
 				event.addMessage(msg);
 			}

@@ -13,6 +13,10 @@ public class Message {
 	 */
 	private long createUserId;
 	/**
+	 * 建立留言使用者暱稱
+	 */
+	private String createUserName;
+	/**
 	 * 留言內容
 	 */
 	private String content;
@@ -28,9 +32,10 @@ public class Message {
 	public Message() {
 	}
 
-	public Message(long messageId, long createUserId, String content, int date, int time) {
+	public Message(long messageId, long createUserId, String createUserName, String content, int date, int time) {
 		this.messageId = messageId;
 		this.createUserId = createUserId;
+		this.createUserName = createUserName;
 		this.content = content;
 		this.date = date;
 		this.time = time;
@@ -47,9 +52,17 @@ public class Message {
 	public long getCreateUserId() {
 		return createUserId;
 	}
-
+	
 	public void setCreateUserId(long createUserId) {
 		this.createUserId = createUserId;
+	}
+	
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
 	}
 
 	public String getContent() {
@@ -78,7 +91,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [messageId=" + messageId + ", createUserId=" + createUserId + ", content=" + content + ", date="
-				+ date + ", time=" + time + "]";
+		return "Message [messageId=" + messageId + ", createUserId=" + createUserId + ", createUserName="
+				+ createUserName + ", content=" + content + ", date=" + date + ", time=" + time + "]";
 	}
 }
