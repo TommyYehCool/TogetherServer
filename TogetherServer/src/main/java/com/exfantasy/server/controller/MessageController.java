@@ -10,11 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.exfantasy.server.models.EventEntity;
 import com.exfantasy.server.models.MessageEntity;
-import com.exfantasy.server.service.EventManager;
 import com.exfantasy.server.service.MessageManager;
-import com.exfantasy.server.vo.Event;
 import com.exfantasy.server.vo.OpResult;
 
 @Controller
