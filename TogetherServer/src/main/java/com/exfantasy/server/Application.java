@@ -11,10 +11,12 @@ public class Application {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
+
 		EventHolderBean bean = ctx.getBean(EventHolderBean.class);
+
 		System.out.println("Event processed ?? - " + bean.getEventFired());
 		
-		System.out.println(System.getProperty("file.encoding"));
+//		System.out.println(System.getProperty("file.encoding"));
 	}
 
 }
