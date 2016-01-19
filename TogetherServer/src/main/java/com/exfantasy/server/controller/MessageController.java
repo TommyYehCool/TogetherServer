@@ -18,8 +18,6 @@ import com.exfantasy.server.vo.OpResult;
 @RequestMapping(value = "/message")
 public class MessageController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
-	
 	@Autowired
 	private MessageManager msgManager;
 	
