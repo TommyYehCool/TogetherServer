@@ -1,0 +1,9 @@
+1. 因為現在用 jenkins 自動 build 多個 server instance 在同一台電腦上
+
+2. 會自動把已啟動的殺掉, 再啟動一個 build 好的
+
+3. 所以有修改 build.gradle 的
+
+   windowsScript.text = windowsScript.text.replace('JAVA_EXE=java.exe', 'JAVA_EXE=C:/Program Files (x86)/Java/jre1.8.0_45/bin/java_for_community_server.exe')
+   
+4. 記得換台別的 server 要注意這塊
