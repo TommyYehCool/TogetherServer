@@ -4,6 +4,6 @@
 
 3. 所以有修改 build.gradle 的
 
-   windowsScript.text = windowsScript.text.replace('JAVA_EXE=java.exe', 'JAVA_EXE=C:/Program Files (x86)/Java/jre1.8.0_45/bin/java_for_community_server.exe')
+   windowsScript.text = windowsScript.text.replace('JAVA_EXE=java.exe', 'JAVA_EXE=C:/Program Files (x86)/Java/jre1.8.0_45/bin/java_for_together_server.exe')
    
 4. 記得換台別的 server 要注意這塊
