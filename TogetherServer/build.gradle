@@ -51,5 +51,6 @@ startScripts {
     	unixScript.text = unixScript.text.replace('DEFAULT_JVM_OPTS=', 'DEFAULT_JVM_OPTS=-Dfile.encoding=UTF-8')
         windowsScript.text = windowsScript.text.replace('DEFAULT_JVM_OPTS=', 'DEFAULT_JVM_OPTS=-Dfile.encoding=UTF-8')
         windowsScript.text = windowsScript.text.replace('JAVA_EXE=java.exe', 'JAVA_EXE="C:/Program Files (x86)/Java/jre1.8.0_45/bin/java_for_together_server.exe"')
+        windowsScript.text = windowsScript.text.replace('"%JAVA_EXE%" %DEFAULT_JVM_OPTS%', '%JAVA_EXE% %DEFAULT_JVM_OPTS%')
     }
 }

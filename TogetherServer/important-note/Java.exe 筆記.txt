@@ -4,6 +4,10 @@
 
 3. 所以有修改 build.gradle 的
 
+   將 java.exe 換成 自己改過名的
    windowsScript.text = windowsScript.text.replace('JAVA_EXE=java.exe', 'JAVA_EXE="C:/Program Files (x86)/Java/jre1.8.0_45/bin/java_for_together_server.exe"')
+   
+   注意引號問題
+   windowsScript.text = windowsScript.text.replace('"%JAVA_EXE%" %DEFAULT_JVM_OPTS%', '%JAVA_EXE% %DEFAULT_JVM_OPTS%')
    
 4. 記得換台別的 server 要注意這塊
